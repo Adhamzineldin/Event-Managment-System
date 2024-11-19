@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eventmanagmentsystem.controllers.TestController" spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+    <!-- Add fx:id to bind the label to the controller -->
+    <Label fx:id="welcomeText" style="-fx-font-size: 16px;" />
+    <Button text="Click Me" onAction="#handleButtonClick" />
+</VBox>

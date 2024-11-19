@@ -11,8 +11,6 @@ module org.example.eventmanagmentsystem {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens org.eventmanagmentsystem to javafx.fxml;
-    exports org.eventmanagmentsystem;
     exports org.eventmanagmentsystem.app;
     opens org.eventmanagmentsystem.app to javafx.fxml;
     exports org.eventmanagmentsystem.controllers;
