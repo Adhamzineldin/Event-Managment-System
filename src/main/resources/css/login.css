@@ -40,3 +40,8 @@ Button {
 Button:hover {
     -fx-background-color: #2980B9;
 }
+
+.alert {
+    -fx-text-fill: red;
+    -fx-font-size: 14px;
+}

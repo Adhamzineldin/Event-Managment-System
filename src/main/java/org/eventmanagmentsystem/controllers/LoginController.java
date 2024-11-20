@@ -14,6 +14,9 @@ public class LoginController {
     @FXML
     private Label welcomeLabel;
 
+    @FXML
+    private Label alertLabel;
+
     public void handleLogin() {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -33,9 +36,6 @@ public class LoginController {
     }
 
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
+        alertLabel.setText(message);
     }
 }
