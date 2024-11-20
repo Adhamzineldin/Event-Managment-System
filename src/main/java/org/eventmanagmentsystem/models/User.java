@@ -1,4 +1,4 @@
 package org.eventmanagmentsystem.models;
 
-public class Admin extends User {
+public abstract class User {
 }

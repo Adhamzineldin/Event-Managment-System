@@ -1,4 +1,4 @@
 package org.eventmanagmentsystem.models;
 
-public class Customer {
+public class Customer extends User{
 }

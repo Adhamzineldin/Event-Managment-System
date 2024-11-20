@@ -1,4 +1,5 @@
 package org.eventmanagmentsystem.models;
 
-public class ProjectManager {
+public class ProjectManager extends User {
+
 }
