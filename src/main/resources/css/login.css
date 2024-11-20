@@ -1,0 +1,42 @@
+/* General styling */
+AnchorPane {
+    -fx-background-color: #2C3E50;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+VBox {
+    -fx-background-color: #ECF0F1;
+    -fx-padding: 20;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
+}
+
+Label {
+    -fx-text-fill: #34495E;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+TextField, PasswordField {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1;
+    -fx-focus-color: #3498DB;
+    -fx-faint-focus-color: transparent;
+}
+
+Button {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+Button:hover {
+    -fx-background-color: #2980B9;
+}

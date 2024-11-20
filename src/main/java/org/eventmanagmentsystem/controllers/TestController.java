@@ -2,11 +2,22 @@ package org.eventmanagmentsystem.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import org.eventmanagmentsystem.models.Admin;
 
 public class TestController {
 
     @FXML
+    private Label userName;
+    @FXML
+    private Label userRole;
+    @FXML
     private Label welcomeText; // Bind this to the Label in the FXML file
+    @FXML
+    private TextArea textArea;
+
+    private Admin admin = new Admin("Adham", "123456");
+
 
     @FXML
     private void handleButtonClick() {
@@ -18,6 +29,12 @@ public class TestController {
             welcomeText.setText("");
             System.out.println("Text removed!");
         }
+    }
+
+    @FXML
+    private void initialize() {
+        userName.setText(admin.getUserName());
+        userRole.setText(admin.getRole());
     }
 
 }

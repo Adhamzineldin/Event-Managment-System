@@ -3,8 +3,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.TextArea?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eventmanagmentsystem.controllers.TestController" spacing="10" alignment="CENTER" style="-fx-padding: 20;">
     <!-- Add fx:id to bind the label to the controller -->
-    <Label fx:id="welcomeText" style="-fx-font-size: 16px;" />
+    <Label fx:id="userName" style="-fx-font-size: 20px;" />
+    <Label fx:id="userRole" style="-fx-font-size: 20px;" />
+    <TextArea fx:id="textArea" prefHeight="200" prefWidth="200" />
+
+    <Label fx:id="welcomeText" style="-fx-font-size: 20px;" />
     <Button text="Click Me" onAction="#handleButtonClick" />
 </VBox>
