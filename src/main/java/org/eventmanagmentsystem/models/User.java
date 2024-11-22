@@ -2,36 +2,32 @@ package org.eventmanagmentsystem.models;
 
 public abstract class User {
     private String userName;
-    private String password;
     private String role;
+    private String email;
+    private int id;
 
-    public User(String userName, String password, String role) {
+    public User(int id, String userName, String email, String role) {
         this.userName = userName;
-        this.password = password;
         this.role = role;
+        this.email = email;
+        this.id = id;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public String getRole() {
         return role;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public int getId() {
+        return id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

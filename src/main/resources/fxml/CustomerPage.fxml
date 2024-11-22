@@ -8,7 +8,15 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.CustomerView"
+            fx:controller="org.eventmanagmentsystem.controllers.CustomerController"
             prefHeight="400.0" prefWidth="600.0">
+
+ <HBox spacing="10" alignment="CENTER_LEFT">
+    <Label fx:id="customerName" />
+    <Label fx:id="customerRole" />
+    <Label fx:id="customerEmail" />
+       <Button text="Logout" onAction="#handleLogout" />
+</HBox>
+
 
 </AnchorPane>

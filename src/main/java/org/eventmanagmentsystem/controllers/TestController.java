@@ -16,7 +16,6 @@ public class TestController {
     @FXML
     private TextArea textArea;
 
-    private Admin admin = new Admin("Adham", "123456");
 
 
     @FXML
@@ -33,8 +32,7 @@ public class TestController {
 
     @FXML
     private void initialize() {
-        userName.setText(admin.getUserName());
-        userRole.setText(admin.getRole());
+
     }
 
 }
