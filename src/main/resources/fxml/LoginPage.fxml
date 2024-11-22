@@ -5,16 +5,18 @@
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.eventmanagmentsystem.controllers.LoginController">
     <stylesheets>
-        <URL value="@../css/login.css" />
-
+        <URL value="@../css/login.css"/>
     </stylesheets>
-    <children>
-        <VBox alignment="CENTER" spacing="20.0" prefWidth="400" prefHeight="300" layoutX="100" layoutY="50" fx:id="loginPane">
-            <Label text="Welcome Back!" fx:id="welcomeLabel" />
-            <Label fx:id="alertLabel" styleClass="alert" />
-            <TextField promptText="Username" fx:id="usernameField" />
-            <PasswordField promptText="Password" fx:id="passwordField" />
-            <Button text="Login" onAction="#handleLogin" fx:id="loginButton" />
-        </VBox>
-    </children>
+
+    <!-- Anchor the VBox to all sides of the AnchorPane -->
+    <VBox alignment="CENTER" spacing="20.0" fx:id="loginPane"
+          AnchorPane.topAnchor="50" AnchorPane.leftAnchor="100"
+          AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="50">
+
+        <Label text="Event Management System" fx:id="welcomeLabel"/>
+        <Label fx:id="alertLabel" styleClass="alert"  />
+        <TextField promptText="Username" fx:id="usernameField"/>
+        <PasswordField promptText="Password" fx:id="passwordField"/>
+        <Button text="Login" onAction="#handleLogin" fx:id="loginButton"/>
+    </VBox>
 </AnchorPane>

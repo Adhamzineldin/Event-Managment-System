@@ -28,7 +28,6 @@ public class LoginController {
     public void handleLogin() throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
-
         LoginService loginService = new LoginService();
         User user = loginService.login(username, password, alertLabel);
 
@@ -46,7 +45,7 @@ public class LoginController {
             // Load the scene and set it in the stage
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            Stage stage = (Stage) usernameField.getScene().getWindow();  // Get the current stage
+            Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
 
@@ -58,6 +57,8 @@ public class LoginController {
                 CustomerController customerController = loader.getController();
                 customerController.setUser(user);
             }
+        } else {
+            alertLabel.setOpacity(1);
         }
     }
 }

@@ -15,6 +15,4 @@ module org.example.eventmanagmentsystem {
     opens org.eventmanagmentsystem.app to javafx.fxml;
     exports org.eventmanagmentsystem.controllers;
     opens org.eventmanagmentsystem.controllers to javafx.fxml;
-    exports org.eventmanagmentsystem.views; // Make the views package accessible
-    opens org.eventmanagmentsystem.views to javafx.fxml;
 }

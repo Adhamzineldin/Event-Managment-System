@@ -4,20 +4,30 @@ AnchorPane {
     -fx-font-family: 'Arial', sans-serif;
 }
 
+/* VBox Styling */
 VBox {
     -fx-background-color: #ECF0F1;
     -fx-padding: 20;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
+    -fx-min-width: 300;  /* Minimum width */
+    -fx-min-height: 250;  /* Minimum height */
+    -fx-max-width: 500;  /* Maximum width */
+    -fx-max-height: 400;  /* Maximum height */
+    -fx-pref-width: 100%;  /* Allow width to adapt to parent */
+    -fx-pref-height: 100%;  /* Allow height to adapt to parent */
 }
 
+/* Label Styling */
 Label {
     -fx-text-fill: #34495E;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
+    -fx-alignment: center;
 }
 
+/* Input fields styling */
 TextField, PasswordField {
     -fx-background-radius: 5;
     -fx-border-radius: 5;
@@ -26,8 +36,10 @@ TextField, PasswordField {
     -fx-border-width: 1;
     -fx-focus-color: #3498DB;
     -fx-faint-focus-color: transparent;
+    -fx-pref-width: 250;
 }
 
+/* Button Styling */
 Button {
     -fx-background-color: #3498DB;
     -fx-text-fill: white;
@@ -37,11 +49,28 @@ Button {
     -fx-cursor: hand;
 }
 
+/* Button Hover effect */
 Button:hover {
     -fx-background-color: #2980B9;
 }
 
+/* Alert Label Styling */
 .alert {
     -fx-text-fill: red;
     -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-alignment: center;
+    -fx-opacity: 0; /* Initially hidden */
+    -fx-transition: opacity 0.3s ease-in-out;
+    -fx-padding: 5px;
+}
+
+/* Making VBox responsive */
+VBox {
+    -fx-min-width: 300;
+    -fx-min-height: 250;
+    -fx-max-width: 500;
+    -fx-max-height: 400;
+    -fx-pref-width: 100%;
+    -fx-pref-height: 100%;
 }
