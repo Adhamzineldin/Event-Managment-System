@@ -36,6 +36,8 @@ public class AdminController {
     @FXML
     public void initialize() {
         // Initialization logic if needed
+
+
     }
 
     public void handleLogout(ActionEvent actionEvent) throws IOException {

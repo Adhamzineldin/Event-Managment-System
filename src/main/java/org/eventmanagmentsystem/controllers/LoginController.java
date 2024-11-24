@@ -42,6 +42,7 @@ public class LoginController {
                 loader.setLocation(getClass().getResource("/fxml/CustomerPage.fxml"));
             }
 
+
             // Load the scene and set it in the stage
             Parent root = loader.load();
             Scene scene = new Scene(root);
