@@ -17,6 +17,7 @@
         <Label fx:id="alertLabel" styleClass="alert"  />
         <TextField promptText="Username" fx:id="usernameField"/>
         <PasswordField promptText="Password" fx:id="passwordField"/>
-        <Button text="Login" onAction="#handleLogin" fx:id="loginButton"/>
+        <Button text="Login" onAction="#handleLogin" />
+        <Button text="Sign Up" onAction="#signUp"/>
     </VBox>
 </AnchorPane>

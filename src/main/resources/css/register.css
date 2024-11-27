@@ -1,0 +1,96 @@
+/* General Styles */
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-background-color: #f5f5f5;
+}
+
+/* Title */
+.title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 10 0 20 0;
+}
+
+/* Form Container */
+.form {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.5, 0, 0);
+}
+
+/* Labels */
+.form Label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e;
+}
+
+/* Text Fields and Password Fields */
+.form TextField, .form PasswordField {
+    -fx-pref-width: 300;
+    -fx-padding: 8;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-color: #ecf0f1;
+    -fx-prompt-text-fill: #95a5a6;
+}
+
+.form TextField:focused, .form PasswordField:focused {
+    -fx-border-color: #3498db;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.2), 5, 0.5, 0, 0);
+}
+
+/* Button Container */
+.button-container {
+    -fx-padding: 15 0 0 0;
+}
+
+/* Buttons */
+.primary-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.primary-button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.secondary-button {
+    -fx-background-color: #bdc3c7;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #95a5a6;
+}
+
+/* Alert Label Styles */
+.alert-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: transparent; /* Initially hidden */
+    -fx-padding: 5 0 0 0;
+    -fx-alignment: center;
+}
+
+.alert-label.error {
+    -fx-text-fill: #e74c3c; /* Red for errors */
+}
+
+.alert-label.success {
+    -fx-text-fill: #2ecc71; /* Green for success */
+}
