@@ -1,5 +1,6 @@
 package org.eventmanagmentsystem.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.eventmanagmentsystem.models.User;
+import org.eventmanagmentsystem.services.GUIService;
 import org.eventmanagmentsystem.services.LoginService;
 
 import java.io.IOException;
@@ -35,12 +37,9 @@ public class LoginController {
             String role = user.getRole();
             FXMLLoader loader = new FXMLLoader();
 
-            // Load the appropriate FXML file based on role
-            if (role.equals("admin")) {
-                loader.setLocation(getClass().getResource("/fxml/AdminPage.fxml"));
-            } else if (role.equals("customer")) {
-                loader.setLocation(getClass().getResource("/fxml/CustomerPage.fxml"));
-            }
+
+           String fxmlPath = "/fxml/" + role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() + "Page.fxml";
+           loader.setLocation(getClass().getResource(fxmlPath));
 
 
             // Load the scene and set it in the stage
@@ -61,5 +60,11 @@ public class LoginController {
         } else {
             alertLabel.setOpacity(1);
         }
+    }
+
+    public void signUp(ActionEvent actionEvent) throws IOException {
+        GUIService guiService = new GUIService();
+        guiService.changeScene("/fxml/RegisterPage.fxml", usernameField);
+
     }
 }

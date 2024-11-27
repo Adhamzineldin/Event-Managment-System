@@ -30,4 +30,6 @@ public abstract class User {
         return email;
     }
 
+//    public abstract void getRoleData();
+
 }
