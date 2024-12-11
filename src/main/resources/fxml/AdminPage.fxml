@@ -12,10 +12,10 @@
             prefHeight="400.0" prefWidth="600.0">
 
 
-    <HBox spacing="10">
+    <HBox spacing="10" >
     <Label fx:id="adminName"  />
     <Label fx:id="adminRole"  />
-    <Label fx:id="adminEmail"  />
+    <Label fx:id="adminEmail" />
         <Button text="Logout" onAction="#handleLogout" />
     </HBox>
 
