@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
-
+//Ramy joined GitHub
 public class Main extends Application {
      @Override
     public void start(Stage primaryStage) throws Exception {
