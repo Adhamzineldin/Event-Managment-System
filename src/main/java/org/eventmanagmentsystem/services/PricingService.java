@@ -45,6 +45,9 @@ public class PricingService {
             total=choice_result+choice_result*taxRate;
         }
     }
+    public PricingService(){
+
+    }
     public double getChoice_result(){
         return choice_result;
     }
@@ -56,6 +59,9 @@ public class PricingService {
             return total;
         }
 
+    }
+    public double getTaxRate() {
+        return taxRate;
     }
 //    public String sendEmails(){}/*this stands for notifications and emails and we want the file
 //    that submits the success of the payment and the email with string type of the customer and email to the manager*/
