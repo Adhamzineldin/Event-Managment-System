@@ -3,3 +3,4 @@
 3,jane,Jane@789,jane.doe@example.com,manager
 4,1,1,1,admin
 5,testreg,12345678,testreg@gmail.com,customer
+6,lol,12345678,lol@gmail.com,customer

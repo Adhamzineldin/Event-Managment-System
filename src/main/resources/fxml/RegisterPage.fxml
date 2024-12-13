@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.eventmanagmentsystem.controllers.RegisterController"
-      alignment="center"
-      spacing="20"
-      stylesheets="@../css/register.css"
-      prefWidth="600"
-      prefHeight="400">
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.eventmanagmentsystem.controllers.RegisterController">
+    <stylesheets>
+        <URL value="@../css/register.css"/>
+    </stylesheets>
 
     <!-- Page Title -->
     <Label text="Register" styleClass="title" />
@@ -43,5 +39,4 @@
         <Button text="Register" onAction="#onRegister" styleClass="primary-button" />
         <Button text="Login" onAction="#onLogin" styleClass="secondary-button" />
     </HBox>
-
-</VBox>
+</AnchorPane>

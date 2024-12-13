@@ -63,8 +63,19 @@ public class LoginController {
     }
 
     public void signUp(ActionEvent actionEvent) throws IOException {
-        GUIService guiService = new GUIService();
-        guiService.changeScene("/fxml/RegisterPage.fxml", usernameField);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/RegisterPage.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        double previousWidth = stage.getWidth();
+        double previousHeight = stage.getHeight();
+        stage.setScene(scene);
+        stage.setWidth(previousWidth);
+        stage.setHeight(previousHeight);
+        stage.show();
+
+
 
     }
 }

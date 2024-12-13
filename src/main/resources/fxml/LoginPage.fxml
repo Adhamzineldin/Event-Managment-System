@@ -18,6 +18,6 @@
         <TextField promptText="Username" fx:id="usernameField"/>
         <PasswordField promptText="Password" fx:id="passwordField"/>
         <Button text="Login" onAction="#handleLogin" />
-        <Button text="Sign Up" onAction="#signUp"/>
+        <Button text="SignUp" onAction="#signUp"/>
     </VBox>
 </AnchorPane>
