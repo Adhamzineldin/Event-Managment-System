@@ -17,7 +17,7 @@ public class Main extends Application {
         primaryStage.getIcons().add(icon);
 
         // Set the scene with the loaded FXML
-        Scene scene = new Scene(loader.load(), 600, 400);
+        Scene scene = new Scene(loader.load(), 800, 600);
 
         // Configure the stage
         primaryStage.setTitle("Login Page");

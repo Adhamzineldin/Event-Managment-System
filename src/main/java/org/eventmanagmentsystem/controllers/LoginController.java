@@ -38,8 +38,8 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader();
 
 
-           String fxmlPath = "/fxml/" + role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() + "Page.fxml";
-           loader.setLocation(getClass().getResource(fxmlPath));
+        String fxmlPath = "/fxml/" + role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() + "Page.fxml";
+        loader.setLocation(getClass().getResource(fxmlPath));
 
 
             // Load the scene and set it in the stage
@@ -62,7 +62,7 @@ public class LoginController {
         }
     }
 
-    public void signUp(ActionEvent actionEvent) throws IOException {
+    public void register(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/RegisterPage.fxml"));
         Parent root = loader.load();
