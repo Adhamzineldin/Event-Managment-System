@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import java.net.URL?>
+
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.eventmanagmentsystem.controllers.RegisterController">
     <stylesheets>
         <URL value="@../css/register.css"/>
     </stylesheets>
 
-    <!-- Page Title -->
-    <Label text="Register" styleClass="title" />
+    <!-- Main layout -->
+    <VBox alignment="CENTER" spacing="20" styleClass="root" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
 
-    <!-- Form Container -->
-    <VBox spacing="15" styleClass="form">
-        <HBox spacing="10">
-            <Label text="Username:" />
-            <TextField fx:id="usernameField" promptText="Enter your username" />
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Email:" />
-            <TextField fx:id="emailField" promptText="Enter your email" />
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Password:" />
-            <PasswordField fx:id="passwordField" promptText="Enter your password" />
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Confirm Password:" />
-            <PasswordField fx:id="confirmPasswordField" promptText="Re-enter your password" />
+        <!-- Page Title -->
+        <Label text="Register" styleClass="title" />
+
+        <!-- Form Container -->
+        <VBox spacing="15" styleClass="form">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Username:" />
+                <TextField fx:id="usernameField" promptText="Enter your username" />
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Email:" />
+                <TextField fx:id="emailField" promptText="Enter your email" />
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Password:" />
+                <PasswordField fx:id="passwordField" promptText="Enter your password" />
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Confirm Password:" />
+                <PasswordField fx:id="confirmPasswordField" promptText="Re-enter your password" />
+            </HBox>
+        </VBox>
+
+        <!-- Alert Label -->
+        <Label fx:id="alertLabel" text="" styleClass="alert-label" />
+
+        <!-- Button Section -->
+        <HBox spacing="15" alignment="CENTER" styleClass="button-container">
+            <Button text="Register" onAction="#onRegister" styleClass="primary-button" />
+            <Button text="Login" onAction="#onLogin" styleClass="secondary-button" />
         </HBox>
     </VBox>
-
-    <!-- Alert Label hos -->
-    <Label fx:id="alertLabel" text="" styleClass="alert-label" />
-
-    <!-- Button Section -->
-    <HBox spacing="15" alignment="center" styleClass="button-container">
-        <Button text="Register" onAction="#onRegister" styleClass="primary-button" />
-        <Button text="Login" onAction="#onLogin" styleClass="secondary-button" />
-    </HBox>
 </AnchorPane>
