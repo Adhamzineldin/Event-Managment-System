@@ -31,7 +31,7 @@
         </HBox>
     </VBox>
 
-    <!-- Alert Label -->
+    <!-- Alert Label hos -->
     <Label fx:id="alertLabel" text="" styleClass="alert-label" />
 
     <!-- Button Section -->
