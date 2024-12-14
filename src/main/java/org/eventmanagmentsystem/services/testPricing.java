@@ -10,8 +10,9 @@ public class testPricing {
         System.out.println("Enter the card details: ");
         bank.setCard_no(sc.next());
         bank.setCVV(sc.next());
-        bank.setYear(sc.nextInt());
-        bank.setMonth(sc.nextInt());
+        bank.setMonth(sc.next());
+        bank.setYear(sc.next());
+
 
         System.out.println("Enter the hall you want to book: ");
         PricingService hall=new PricingService(sc.nextInt(),bank);
