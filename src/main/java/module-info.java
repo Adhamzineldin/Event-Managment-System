@@ -10,6 +10,8 @@ module org.example.eventmanagmentsystem {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires javax.mail.api;
+
 
     exports org.eventmanagmentsystem.app;
     opens org.eventmanagmentsystem.app to javafx.fxml;

@@ -1,6 +1,9 @@
 package org.eventmanagmentsystem.models;
 
+import org.eventmanagmentsystem.services.AdminService;
 import org.eventmanagmentsystem.services.EventService;
+import org.eventmanagmentsystem.services.SmtpEmailService;
+import org.eventmanagmentsystem.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,12 @@ public class Customer extends User {
     public void bookEvent(Event event) {
         // Add the event through the EventService
         eventService.addEvent(event);
+        SmtpEmailService emailService = new SmtpEmailService();
+        UserService userService = new UserService();
+        ProjectManager projectManager = (ProjectManager) userService.getUserById(event.getManagerId());
+        ServiceProvider serviceProvider = (ServiceProvider) userService.getUserById(event.getServiceProviderId());
+        emailService.sendEventDetails(event, this.getEmail(), projectManager.getEmail(), serviceProvider.getEmail());
+
     }
 
     // Method to cancel an event (update status to "canceled")
