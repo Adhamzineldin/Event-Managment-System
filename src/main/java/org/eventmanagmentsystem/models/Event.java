@@ -14,6 +14,7 @@ public class Event {
     private double cost;
     private double serviceProviderCost; // Added service provider cost
     private String status;
+    int tax = 10;
 
     public Event(int eventId, int customerId, int managerId, int serviceProviderId, Date eventDate,
                  int eventDuration, int seats, double cost, String status, double serviceProviderCost) {
@@ -134,6 +135,10 @@ public class Event {
     // Method to update event status
     public void updateStatus(String newStatus) {
         this.status = newStatus;
+    }
+
+    public int calculateTotalCost() {
+        return (int) (cost + serviceProviderCost + (cost * tax / 100));
     }
 
 

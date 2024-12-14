@@ -48,4 +48,6 @@ public class CustomerController {
         stage.setHeight(previousHeight);
         stage.show();
     }
+
+
 }
