@@ -1,8 +1,45 @@
 package org.eventmanagmentsystem.models;
 
-public class ServiceProvider extends User{
+import org.eventmanagmentsystem.services.EventService;
 
-    public ServiceProvider(int id, String userName, String email, String role) {
-        super(id, userName, email, role);
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class ServiceProvider extends User{
+    EventService eventService;
+    public ServiceProvider(int id, String userName, String password, String email, String role) {
+        super(id, userName,password, email, role);
+        this.eventService = EventService.getInstance();
+    }
+
+     public List<Event> getEvents() {
+        return eventService.getEventsByUser(this); // Get events where this customer is associated
+    }
+
+    // Method to view the details of a specific event
+    public Event getEventDetails(int eventId) {
+        return eventService.getEventById(eventId); // Get event by ID
+    }
+
+    // Method to view the event history (past events)
+    public List<Event> getEventHistory() {
+        List<Event> customerEvents = eventService.getEventsByUser(this);
+        List<Event> pastEvents = new ArrayList<>();
+        Date currentDate = new Date();
+
+        // Filter past events based on event date and status
+        for (Event event : customerEvents) {
+            if (event.getEventDate().before(currentDate) && event.getStatus().equalsIgnoreCase("completed")) {
+                pastEvents.add(event);
+            }
+        }
+
+        return pastEvents;
+    }
+
+    // Method to update event details
+    public boolean updateEvent(int eventId, Date eventDate, int eventDuration, int seats, double cost, double serviceProviderCost) {
+        return eventService.updateEvent(eventId, eventDate, eventDuration, seats, cost, serviceProviderCost);
     }
 }

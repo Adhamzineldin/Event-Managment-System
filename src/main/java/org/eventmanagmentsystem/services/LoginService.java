@@ -29,7 +29,7 @@ public class LoginService {
 
                     if (storedUsername.equals(username) && storedPassword.equals(password)) {
                         // Use the factory to create a user without saving the password
-                        return UserFactory.createUser(id, storedUsername, email, role);
+                        return UserFactory.createUser(id, storedUsername, storedPassword, email, role);
                     }
                 }
             }

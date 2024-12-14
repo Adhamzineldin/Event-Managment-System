@@ -5,6 +5,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 public class RegisterService {
 
@@ -12,7 +15,7 @@ public class RegisterService {
     private static final String ID_FILE_PATH = "data/last_user_id.txt"; // Path to store the last used user ID
 
     public boolean saveUser(String username, String email, String password) {
-        int userId = getNextUserId();
+        int userId = generateUniqueId();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             // Save the new user in the format: "id,username,password,email,role"
@@ -25,28 +28,12 @@ public class RegisterService {
         }
     }
 
-    private int getNextUserId() {
-        int lastUserId = 0;
-        try (BufferedReader reader = new BufferedReader(new FileReader(ID_FILE_PATH))) {
-            String lastId = reader.readLine();
-            if (lastId != null) {
-                lastUserId = Integer.parseInt(lastId);
-            }
-        } catch (IOException e) {
-            // If the ID file does not exist or cannot be read, assume ID starts from 0
-            e.printStackTrace();
-        }
+     private int generateUniqueId() {
+        String datePart = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        int randomPart = new Random().nextInt(100); // 2-digit random number (0-99)
 
-        // Increment the last ID to get the next user ID
-        int nextUserId = lastUserId + 1;
-
-        // Update the last user ID in the ID file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ID_FILE_PATH))) {
-            writer.write(String.valueOf(nextUserId));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return nextUserId;
+        // Combine the date and random parts, ensuring it's smaller than Integer.MAX_VALUE
+        String uniqueIdString = datePart.substring(2) + String.format("%02d", randomPart); // Get the last 6 digits of the date and add the random part
+        return Integer.parseInt(uniqueIdString); // Convert to integer
     }
 }

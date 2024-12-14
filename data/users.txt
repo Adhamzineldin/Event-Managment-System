@@ -1,6 +1,5 @@
-1,admin,Admin@123,admin@example.com,admin
-2,john,JohnDoe@456,john.doe@example.com,customer
-3,jane,Jane@789,jane.doe@example.com,manager
-4,1,1,1,admin
-5,testreg,12345678,testreg@gmail.com,customer
-6,lol,12345678,lol@gmail.com,customer
+1,admin,admin@123,admin@example.com,admin
+2,customer,customer@123,customer@example.com,customer
+3,manager,manager@123,manager@example.com,manager
+4,provider,provider@123,provider@example.com,serviceProvider
+24121464,lollol,12345678,lollol@gmail.com,customer
