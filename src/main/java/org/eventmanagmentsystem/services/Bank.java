@@ -61,49 +61,33 @@ public class Bank {
             return true;
         }
     }
-    public boolean NotexpireMonth(String month,String year){
-        boolean notMonthExpire=false;
-        int month_int=Integer.parseInt(month);
+    public boolean NotexpireDate(String Month,String Year){
+        boolean flag=false;
+        int month_int=Integer.parseInt(Month);
         int current_month=(date.getMonth()%12)+1;
-        if(current_month==month_int) {
-            if(!NotexpireYear(year,month)){
-                notMonthExpire=true;
-            }
-
-        }
-        else if(current_month>month_int){
-            if(!NotexpireYear(year,month)){
-                throw new IllegalArgumentException("Expired");
-            }
-            else{
-                notMonthExpire=true;
-            }
-        }
-       else if(month_int<current_month && !NotexpireYear(year,month)){
-           throw new IllegalArgumentException("Expired");
-        }
-       else{
-           notMonthExpire=true;
-        }
-        return notMonthExpire;
-    }
-    public boolean NotexpireYear(String Year,String month){
-        boolean notExpire=false;
         int current_year = date.getYear()%100;
         int yearInt = Integer.parseInt(Year);
         if(yearInt<current_year){
-            throw new IllegalArgumentException("This card is expired");
+            throw new IllegalArgumentException("Expired");
         }
         else if(yearInt==current_year){
-            if(NotexpireMonth(month,year))
+            if(current_month==month_int){
                 throw new IllegalArgumentException("Expired");
-            else notExpire=true;
-        }
-            else{
-                notExpire=true;
+            }
+           else if(current_month>month_int){
+               throw new IllegalArgumentException("Expired");
+            }
+           else{
+               flag=true;
             }
 
-        return notExpire;
+        }
+        else{
+            flag=true;
+        }
+        return flag;
+
+
 
     }
     public boolean checkMonth(String month) {
@@ -140,8 +124,8 @@ public class Bank {
         checkYear(year);
         this.month=month;
         this.year=year;
-        NotexpireYear(year,month);
-        NotexpireMonth(month,year);
+        boolean b=NotexpireDate(month,year);
+
 
 
     }
@@ -173,7 +157,7 @@ public class Bank {
         checkYear(year);
         this.year = year;
         if(!monthEmpty(month)){
-            NotexpireYear(year,month);
+            NotexpireDate(month,year);
         }
         else{
             setMonth(month);
@@ -183,7 +167,7 @@ public class Bank {
         checkMonth(month);
         this.month = month;
         if(!yearEmpty(year)){
-            NotexpireYear(year,month);
+            NotexpireDate(month,year);
         }
         else{
             setYear(year);
