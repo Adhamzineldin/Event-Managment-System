@@ -57,7 +57,10 @@ public class Bank {
         else if(year.length()!=2){
             throw new IllegalArgumentException("This field should be 2 digits");
         }
-        else{
+        else if(!(year.charAt(0)>='0' && year.charAt(0)<='9' && year.charAt(1)>='0' && year.charAt(1)<='9')){
+            throw new IllegalArgumentException("This field should be digits");
+        }
+        else {
             return true;
         }
     }
@@ -95,7 +98,7 @@ public class Bank {
         if (emptyCard(month)) {//in case the month is kept empty
             throw new IllegalArgumentException("This field is required ");
         } else if (month.length() == 2) {
-            if (month.charAt(0) == '0' || month.charAt(0) == '1') {
+            if (month.charAt(0) >= '0' && month.charAt(0) <= '1') {
                 if (month.charAt(0) == '0' && (month.charAt(1) >= '1') && (month.charAt(1) <= '9')) {
                     check=true;
                 } else if (month.charAt(0) == '1' && (month.charAt(1) >= '0' && month.charAt(1) <= '2')) {
@@ -132,6 +135,7 @@ public class Bank {
 
 
     public boolean checkCard(String person_card){
+        boolean flag=false;
         if(emptyCard(person_card)){
             throw new IllegalArgumentException("Must provide card_no");
 
@@ -139,19 +143,35 @@ public class Bank {
         else if(person_card.length() != 16){
             throw new IllegalArgumentException("Card number length must be 16 numbers:");
         }
-        else
-            return true;
+        for(int i=0;i<person_card.length();i++){
+            if(!(person_card.charAt(i) >='0' && person_card.charAt(i)<='9'))
+                throw new IllegalArgumentException("Card number must be digits");
+            else
+                flag=true;
+        }
+        return flag;
+
     }
     /*for the check of CVV*/
     public boolean checkCVV(String cvv){
+        boolean flag=false;
         if (emptyCVV(cvv)) {
             throw new IllegalArgumentException("Must provide cvv");
         }
         else if (cvv.length() != 3) {
             throw new IllegalArgumentException("CVV length must be  3 digits:");
         }
-        else
-            return true;
+        for(int i=0;i<cvv.length();i++) {
+
+            if (!(cvv.charAt(i) >= '0' && cvv.charAt(i) <= '9')) {
+                throw new IllegalArgumentException("CVV number must be digits");
+            } else {
+                flag = true;
+            }
+        }
+
+
+           return flag;
     }
     public void setYear(String year) {
         checkYear(year);
