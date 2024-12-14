@@ -10,14 +10,17 @@ public class testPricing {
         System.out.println("Enter the card details: ");
         bank.setCard_no(sc.next());
         bank.setCVV(sc.next());
-        bank.setMonth(sc.next());
-        bank.setYear(sc.next());
+       bank.setMonthAndYear(sc.next(),sc.next());
+
+
+
 
 
         System.out.println("Enter the hall you want to book: ");
         PricingService hall=new PricingService(sc.nextInt(),bank);
         System.out.println("The total equals: "+hall.getTotal());
-
+//    java.util.Date date = new java.util.Date();
+//        System.out.println(date.getYear()%100);
 
 
 

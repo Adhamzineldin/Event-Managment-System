@@ -4,7 +4,7 @@ public class Bank {
     private String CVV;
     private String year;
     private String month;
-    private java.util.Date date= new java.util.Date();
+    private final java.util.Date date= new java.util.Date();
     public Bank(String card, String cvv, String year,String month) {
         this.card_no = card;
         if(!checkCard(card)) {
@@ -61,6 +61,51 @@ public class Bank {
             return true;
         }
     }
+    public boolean NotexpireMonth(String month,String year){
+        boolean notMonthExpire=false;
+        int month_int=Integer.parseInt(month);
+        int current_month=(date.getMonth()%12)+1;
+        if(current_month==month_int) {
+            if(!NotexpireYear(year,month)){
+                notMonthExpire=true;
+            }
+
+        }
+        else if(current_month>month_int){
+            if(!NotexpireYear(year,month)){
+                throw new IllegalArgumentException("Expired");
+            }
+            else{
+                notMonthExpire=true;
+            }
+        }
+       else if(month_int<current_month && !NotexpireYear(year,month)){
+           throw new IllegalArgumentException("Expired");
+        }
+       else{
+           notMonthExpire=true;
+        }
+        return notMonthExpire;
+    }
+    public boolean NotexpireYear(String Year,String month){
+        boolean notExpire=false;
+        int current_year = date.getYear()%100;
+        int yearInt = Integer.parseInt(Year);
+        if(yearInt<current_year){
+            throw new IllegalArgumentException("This card is expired");
+        }
+        else if(yearInt==current_year){
+            if(NotexpireMonth(month,year))
+                throw new IllegalArgumentException("Expired");
+            else notExpire=true;
+        }
+            else{
+                notExpire=true;
+            }
+
+        return notExpire;
+
+    }
     public boolean checkMonth(String month) {
         boolean check = false;
         if (emptyCard(month)) {//in case the month is kept empty
@@ -90,6 +135,16 @@ public class Bank {
         checkCVV(cvv);
         this.CVV = cvv;
     }
+    public void setMonthAndYear(String month,String year){
+        checkMonth(month);
+        checkYear(year);
+        this.month=month;
+        this.year=year;
+        NotexpireYear(year,month);
+        NotexpireMonth(month,year);
+
+
+    }
 
 
     public boolean checkCard(String person_card){
@@ -114,13 +169,25 @@ public class Bank {
         else
             return true;
     }
-    public void setYear(String  year) {
+    public void setYear(String year) {
         checkYear(year);
-        this.year=year;
+        this.year = year;
+        if(!monthEmpty(month)){
+            NotexpireYear(year,month);
+        }
+        else{
+            setMonth(month);
+        }
     }
     public void setMonth(String month) {
         checkMonth(month);
-        this.month=month;
+        this.month = month;
+        if(!yearEmpty(year)){
+            NotexpireYear(year,month);
+        }
+        else{
+            setYear(year);
+        }
     }
     /*getter*/
     public String getCard_no() {
