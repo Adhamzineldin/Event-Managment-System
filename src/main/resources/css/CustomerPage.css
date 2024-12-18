@@ -1,0 +1,114 @@
+/* Root Container */
+.rootContainer {
+    -fx-background-color: #f0f4f8; /* Light Grayish Blue */
+    -fx-padding: 20px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+}
+
+/* Section Title */
+.sectionTitle {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50; /* Dark Blue Title */
+}
+
+/* Customer Info Section */
+.customerInfoSection {
+    -fx-background-color: #ecf0f3; /* Lighter Background */
+    -fx-padding: 15px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.4, 0, 0);
+}
+
+/* Labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e; /* Dark Gray */
+}
+
+.valueLabel {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2980b9; /* Blue */
+    -fx-font-weight: bold;
+}
+
+/* Form Container */
+.formContainer {
+    -fx-background-color: #ffffff; /* White Background */
+    -fx-padding: 20px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-spacing: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.6, 0, 0);
+}
+
+/* Form Title */
+.formTitle {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2980b9; /* Blue Title */
+}
+
+/* Input Fields */
+.inputField {
+    -fx-background-color: #f7f9fc; /* Light Input Background */
+    -fx-text-fill: #34495e; /* Dark Text */
+    -fx-border-color: #bdc3c7; /* Light Border */
+    -fx-border-radius: 5px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+.inputField:focused {
+    -fx-border-color: #2980b9; /* Blue Focus Border */
+}
+
+/* Input Area */
+.inputArea {
+    -fx-background-color: #f7f9fc;
+    -fx-text-fill: #34495e;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+/* Buttons */
+.primaryButton {
+    -fx-background-color: #3498db; /* Bright Blue */
+    -fx-text-fill: #ffffff; /* White Text */
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px 16px;
+}
+
+.secondaryButton {
+    -fx-background-color: #95a5a6; /* Gray */
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px 16px;
+}
+
+.logoutButton {
+    -fx-background-color: #e74c3c; /* Red */
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px 16px;
+}
+
+.primaryButton:hover, .secondaryButton:hover, .logoutButton:hover {
+    -fx-background-color: #2980b9; /* Darker Blue Hover */
+    -fx-text-fill: #f0f4f8; /* Light Text */
+}
+
+/* Feedback Message */
+.feedbackMessage {
+    -fx-font-size: 14px;
+    -fx-text-fill: #e74c3c; /* Red Feedback */
+    -fx-font-weight: bold;
+}

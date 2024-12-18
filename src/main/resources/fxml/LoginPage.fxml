@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import java.net.URL?>
 
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.eventmanagmentsystem.controllers.LoginController">
@@ -14,10 +17,15 @@
           AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="50">
 
         <Label text="Event Management System" fx:id="welcomeLabel"/>
+        <ImageView fitWidth="100" fitHeight="100">
+            <image>
+                <Image url="@../images/icon.png" />
+            </image>
+        </ImageView>
         <Label fx:id="alertLabel" styleClass="alert"  />
         <TextField promptText="Username" fx:id="usernameField"/>
         <PasswordField promptText="Password" fx:id="passwordField"/>
         <Button text="Login" onAction="#handleLogin" />
-        <Button text="SignUp" onAction="#signUp"/>
+        <Hyperlink text="Don't have an account? Register" onAction="#signUp"/>
     </VBox>
 </AnchorPane>

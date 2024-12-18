@@ -3,3 +3,5 @@
 3,managerName,manager@123,mohalya3@gmail.com,manager
 4,provider,provider@123,mohalya3@gmail.com,serviceProvider
 24121464,lollol,12345678,lollol@gmail.com,customer
+24121868,testAdmin,testAdmin@123,testAdmin@gmail.com,Admin
+24121804,testAdmin,testAdmin@123,testAdmin@gmail.com,Admin
