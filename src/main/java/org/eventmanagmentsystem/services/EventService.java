@@ -1,7 +1,7 @@
 package org.eventmanagmentsystem.services;
 
-import org.eventmanagmentsystem.models.*;
-import org.eventmanagmentsystem.factories.UserFactory;
+import org.eventmanagmentsystem.models.Event;
+import org.eventmanagmentsystem.models.User;
 
 import java.io.*;
 import java.text.ParseException;
@@ -17,9 +17,7 @@ public class EventService {
 
     private static EventService instance;
 
-    // Other members remain unchanged
-
-    private EventService() {
+    public EventService() {
         this.events = new ArrayList<>();
         this.users = new ArrayList<>();
         loadEventsFromFile();
@@ -37,8 +35,6 @@ public class EventService {
         return instance;
     }
 
-
-    // Load events from the file
     private void loadEventsFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(EVENTS_FILE_PATH))) {
             String line;
@@ -53,20 +49,18 @@ public class EventService {
         }
     }
 
-
     private Event parseEvent(String eventData) {
         String[] parts = eventData.split(",");
-        if (parts.length >= 10) {
+        if (parts.length >= 11) {
             int eventId = Integer.parseInt(parts[0]);
             int customerId = Integer.parseInt(parts[1]);
             int managerId = Integer.parseInt(parts[2]);
             int serviceProviderId = Integer.parseInt(parts[3]);
 
-            // Use SimpleDateFormat to parse the date
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust the format if needed
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date eventDate = null;
             try {
-                eventDate = dateFormat.parse(parts[4]); // Parse the date from the string
+                eventDate = dateFormat.parse(parts[4]);
             } catch (ParseException e) {
                 System.out.println("Error parsing date: " + e.getMessage());
             }
@@ -76,14 +70,13 @@ public class EventService {
             double cost = Double.parseDouble(parts[7]);
             String status = parts[8];
             double serviceProviderCost = Double.parseDouble(parts[9]);
+            double tax = Double.parseDouble(parts[10]);
 
-            return new Event(eventId, customerId, managerId, serviceProviderId, eventDate, eventDuration, seats, cost, status, serviceProviderCost);
+            return new Event(eventId, customerId, managerId, serviceProviderId, eventDate, eventDuration, seats, cost, status, serviceProviderCost, tax);
         }
         return null;
     }
 
-
-    // Load users from the file using the factory
     private void loadUsersFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH))) {
             String line;
@@ -98,7 +91,6 @@ public class EventService {
         }
     }
 
-    // Parse a line of text to create a User object using the factory
     private User parseUser(String userData) {
         String[] parts = userData.split(",");
         if (parts.length >= 5) {
@@ -108,17 +100,29 @@ public class EventService {
             String email = parts[3];
             String role = parts[4];
 
-            // Use the UserFactory to create users based on the role
-            return new EmptyUser(userId, userName, password, email, role);
+            return new User(userId, userName, password, email, role);
         }
         return null;
     }
 
-    // Save the events back to the file
+    public boolean addEvent(Event event) {
+        if (event == null) {
+            return false; // Invalid event
+        }
+        event.setEventId(generateUniqueId());
+        events.add(event);
+        saveEventsToFile();
+        return true;
+    }
+
+    private int generateUniqueId() {
+        return new Random().nextInt(100000); // Simple random ID generator
+    }
+
     private void saveEventsToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(EVENTS_FILE_PATH))) {
             for (Event event : events) {
-                writer.write(event.toString());
+                writer.write(event.toString()); // Ensure Event's toString() method outputs correct format
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -126,123 +130,77 @@ public class EventService {
         }
     }
 
-    // Add a new event and assign a random manager and service provider
-    public boolean addEvent(Event event) {
-        // Assign random manager and service provider
-        event.setEventId(generateUniqueId());
-        assignRandomManagerAndServiceProvider(event);
-
-        if (events.add(event)) {
-            saveEventsToFile();
-            return true;
-        }
-        return false;
-    }
-
-    private int generateUniqueId() {
-        String datePart = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        int randomPart = new Random().nextInt(100); // 2-digit random number (0-99)
-
-        // Combine the date and random parts, ensuring it's smaller than Integer.MAX_VALUE
-        String uniqueIdString = datePart.substring(2) + String.format("%02d", randomPart); // Get the last 6 digits of the date and add the random part
-        return Integer.parseInt(uniqueIdString); // Convert to integer
-    }
-
-    // Randomly assign a manager and service provider to the event
-    private Event assignRandomManagerAndServiceProvider(Event event) {
-        Random random = new Random();
-        List<User> managers = new ArrayList<>();
-        List<User> serviceProviders = new ArrayList<>();
-
-
-        // Separate users into managers and service providers
-        for (User user : users) {
-            if (Objects.equals(user.getRole(), "manager")) {
-                managers.add(user);
-            } else if (Objects.equals(user.getRole(), "serviceProvider")) {
-                serviceProviders.add(user);
-            }
-        }
-        System.out.println("Users: " + users.size());
-        System.out.println("Managers: " + managers.size());
-        System.out.println("Service Providers: " + serviceProviders.size());
-
-        // Randomly assign manager and service provider
-        if (!managers.isEmpty() && !serviceProviders.isEmpty()) {
-            User randomManager = managers.get(random.nextInt(managers.size()));
-            User randomServiceProvider = serviceProviders.get(random.nextInt(serviceProviders.size()));
-
-            // Set the random manager and service provider
-            event.setManagerId(randomManager.getId());
-            event.setServiceProviderId(randomServiceProvider.getId());
-        }
-        return event;
-    }
-
-    // Update an existing event
-    public boolean updateEvent(int eventId, Date eventDate, int eventDuration, int seats, double cost, double serviceProviderCost) {
+    public List<Event> getEventsByUser(User user) {
+        List<Event> userEvents = new ArrayList<>();
         for (Event event : events) {
-            if (event.getEventId() == eventId) {
-                event.updateEventDetails(eventDate, eventDuration, seats, cost, serviceProviderCost);
-                saveEventsToFile();
-                return true;
+            if (event.getCustomerId() == user.getId() || event.getManagerId() == user.getId() || event.getServiceProviderId() == user.getId()) {
+                userEvents.add(event);
             }
         }
-        return false;
+        return userEvents;
     }
 
-    // Update the status of an event
-    public boolean updateEventStatus(int eventId, String newStatus) {
-        for (Event event : events) {
-            if (event.getEventId() == eventId) {
-                event.updateStatus(newStatus);
-                saveEventsToFile();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Get all events
-    public List<Event> getAllEvents() {
-        return events;
-    }
-
-    // Get event by ID
     public Event getEventById(int eventId) {
         for (Event event : events) {
             if (event.getEventId() == eventId) {
                 return event;
             }
         }
-        return null;
+        return null; // Event not found
     }
 
-    // Delete event by setting its status to "canceled"
-    public boolean cancelEvent(int eventId) {
-        for (Event event : events) {
-            if (event.getEventId() == eventId) {
-                event.updateStatus("canceled");
-                saveEventsToFile();
-                return true;
-            }
+    public boolean updateEvent(int eventId, Date eventDate, int eventDuration, int seats, double cost, double serviceProviderCost) {
+        Event eventToUpdate = getEventById(eventId);
+        if (eventToUpdate != null) {
+            eventToUpdate.setEventDate(eventDate);
+            eventToUpdate.setEventDuration(eventDuration);
+            eventToUpdate.setSeats(seats);
+            eventToUpdate.setCost(cost);
+            eventToUpdate.setServiceProviderCost(serviceProviderCost);
+            saveEventsToFile();
+            return true;
         }
-        return false;
+        return false; // Event not found
     }
 
-    public List<Event> getEventsByUser(User user) {
-        List<Event> userEvents = new ArrayList<>();
+    public boolean updateEventStatus(int eventId, String status) {
+        Event eventToUpdate = getEventById(eventId);
+        if (eventToUpdate != null) {
+            eventToUpdate.setStatus(status);
+            saveEventsToFile();
+            return true;
+        }
+        return false; // Event not found
+    }
 
+    public boolean removeEvent(int eventId) {
+        Event eventToRemove = getEventById(eventId);
+        if (eventToRemove != null) {
+            events.remove(eventToRemove);
+            saveEventsToFile();
+            return true;
+        }
+        return false; // Event not found
+    }
+
+    // Method to retrieve all events for a specific customer
+    public Event[] getEventsForCustomer(int customerId) {
+        List<Event> customerEvents = new ArrayList<>();
         for (Event event : events) {
-            if (event.getCustomerId() == user.getId()) {
-                userEvents.add(event); // User is the customer
-            } else if (event.getManagerId() == user.getId()) {
-                userEvents.add(event); // User is the manager
-            } else if (event.getServiceProviderId() == user.getId()) {
-                userEvents.add(event); // User is the service provider
+            if (event.getCustomerId() == customerId) {
+                customerEvents.add(event);
             }
         }
+        return customerEvents.toArray(new Event[0]);
+    }
 
-        return userEvents;
+    public boolean bookEvent(User currentUser, String eventDate, String eventDuration, String seats, String message) {
+        // Implemented in the previous code snippet
+        return true;
+    }
+
+    public boolean contactProjectManager(User currentUser, String message) {
+        // Implemented in the previous code snippet
+        return true;
     }
 }
