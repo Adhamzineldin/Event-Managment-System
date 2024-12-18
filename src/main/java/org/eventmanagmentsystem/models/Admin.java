@@ -36,22 +36,6 @@ public class Admin extends User {
         return adminService.removeUser(customerId, "customer");
     }
 
-    public boolean addUser(User user) {
-        return adminService.addUser(user);
-    }
-
-    public boolean removeUser(int userId, String userType) {
-        return adminService.removeUser(userId, userType);
-    }
-    
-    
-    public List<User> getAllUsers() {
-        List<User> users = adminService.getAllUsers();
-        return users;
-    }
-    
-    
-    
     public List<ProjectManager> getManagers() {
         List<ProjectManager> managers = adminService.viewUsersByRole(ProjectManager.class);
         return managers;

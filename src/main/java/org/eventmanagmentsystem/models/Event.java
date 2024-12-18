@@ -12,12 +12,12 @@ public class Event {
     private int eventDuration;
     private int seats;
     private double cost;
-    private double serviceProviderCost;
+    private double serviceProviderCost; // Added service provider cost
     private String status;
-    private double tax;
+    int tax = 10;
 
     public Event(int eventId, int customerId, int managerId, int serviceProviderId, Date eventDate,
-                 int eventDuration, int seats, double cost, String status, double serviceProviderCost, double tax) {
+                 int eventDuration, int seats, double cost, String status, double serviceProviderCost) {
         this.eventId = eventId;
         this.customerId = customerId;
         this.managerId = managerId;
@@ -27,11 +27,12 @@ public class Event {
         this.seats = seats;
         this.cost = cost;
         this.status = status;
-        this.serviceProviderCost = serviceProviderCost;
-        this.tax = tax;
+        this.serviceProviderCost = serviceProviderCost; // Initialize service provider cost
     }
 
-    public Event(int customerId, Date eventDate, int eventDuration, int seats, double cost, String status, double serviceProviderCost) {
+    public Event( int customerId, Date eventDate,
+                 int eventDuration, int seats, double cost, String status, double serviceProviderCost) {
+
         this.customerId = customerId;
         this.eventDate = eventDate;
         this.eventDuration = eventDuration;
@@ -39,9 +40,9 @@ public class Event {
         this.cost = cost;
         this.status = status;
         this.serviceProviderCost = serviceProviderCost;
-        this.tax = 10;  // Default tax rate
     }
 
+    // Getters and Setters
     public int getEventId() {
         return eventId;
     }
@@ -122,22 +123,38 @@ public class Event {
         this.serviceProviderCost = serviceProviderCost;
     }
 
-    public double getTax() {
-        return tax;
+    // Method to update event details
+    public void updateEventDetails(Date eventDate, int eventDuration, int seats, double cost, double serviceProviderCost) {
+        this.eventDate = eventDate;
+        this.eventDuration = eventDuration;
+        this.seats = seats;
+        this.cost = cost;
+        this.serviceProviderCost = serviceProviderCost; // Update service provider cost as well
     }
 
-    public void setTax(double tax) {
-        this.tax = tax;
+    // Method to update event status
+    public void updateStatus(String newStatus) {
+        this.status = newStatus;
     }
 
-    public double calculateTotalCost() {
-        return this.cost + this.serviceProviderCost + (this.cost * this.tax / 100);
+    public int calculateTotalCost() {
+        return (int) (cost + serviceProviderCost + (cost * tax / 100));
     }
+
 
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return eventId + "," + customerId + "," + managerId + "," + serviceProviderId + "," +
-                dateFormat.format(eventDate) + "," + eventDuration + "," + seats + "," + cost + "," + status + "," + serviceProviderCost;
+        return eventId + "," +
+                customerId + "," +
+                managerId + "," +
+                serviceProviderId + "," +
+                dateFormat.format(eventDate) + "," +
+                eventDuration + "," +
+                seats + "," +
+                cost + "," +
+                status + "," +
+                serviceProviderCost;
     }
+
 }

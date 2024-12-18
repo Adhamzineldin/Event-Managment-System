@@ -1,12 +1,10 @@
 package org.eventmanagmentsystem.models;
 
+import org.eventmanagmentsystem.services.AdminService;
 import org.eventmanagmentsystem.services.EventService;
 import org.eventmanagmentsystem.services.SmtpEmailService;
 import org.eventmanagmentsystem.services.UserService;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -17,41 +15,24 @@ public class Customer extends User {
 
     public Customer(int id, String userName, String password, String email, String role) {
         super(id, userName, password, email, role);
-        this.eventService = EventService.getInstance();
+         this.eventService = EventService.getInstance();
     }
 
     // Method to book an event
-    // Inside the Customer class
+    public void bookEvent(Event event) {
+        // Add the event through the EventService
+        eventService.addEvent(event);
+        SmtpEmailService emailService = new SmtpEmailService();
+        UserService userService = new UserService();
+        ProjectManager projectManager = (ProjectManager) userService.getUserById(event.getManagerId());
+        ServiceProvider serviceProvider = (ServiceProvider) userService.getUserById(event.getServiceProviderId());
+        emailService.sendEventDetails(event, this.getEmail(), projectManager.getEmail(), serviceProvider.getEmail());
 
-    public boolean bookEvent(Event event) {
-        boolean isEventAdded = eventService.addEvent(event);
-        if (isEventAdded) {
-            SmtpEmailService emailService = new SmtpEmailService();
-            UserService userService = new UserService();
-            ProjectManager projectManager = (ProjectManager) userService.getUserById(event.getManagerId());
-            ServiceProvider serviceProvider = (ServiceProvider) userService.getUserById(event.getServiceProviderId());
-
-            // Send event details to customer, project manager, and service provider
-            emailService.sendEventDetails(event, this.getEmail(), projectManager.getEmail(), serviceProvider.getEmail());
-
-            // Save event details to events.txt
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/events.txt", true))) {
-                writer.write(event.toString());
-                writer.newLine(); // Ensure each event is on a new line
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-
-            return true;
-        }
-        return false;
     }
-
 
     // Method to cancel an event (update status to "canceled")
     public boolean cancelEvent(int eventId) {
-        // Update the event status to "canceled"
+        // Update the event status to "canceled" instead of deleting
         return eventService.updateEventStatus(eventId, "canceled");
     }
 
@@ -62,7 +43,7 @@ public class Customer extends User {
 
     // Method to view the details of a specific event
     public Event getEventDetails(int eventId) {
-        return eventService.getEventById(eventId); // Get event by ID and return the Event object
+        return eventService.getEventById(eventId); // Get event by ID
     }
 
     // Method to view the event history (past events)
@@ -88,7 +69,6 @@ public class Customer extends User {
 
     // Placeholder method to simulate payment for the event
     public boolean payEvent(int eventId) {
-        // Simulate payment processing, in reality, this would integrate with a payment gateway
-        return true;
+        return true; // In a real implementation, this would process payment
     }
 }

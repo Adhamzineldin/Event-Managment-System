@@ -1,8 +1,5 @@
 package org.eventmanagmentsystem.models;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 import org.eventmanagmentsystem.services.MessageService;
 
 import java.text.SimpleDateFormat;
@@ -11,31 +8,31 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-public class User {
-    private StringProperty userName;
-    private StringProperty role;
-    private StringProperty email;
+public abstract class User {
+    private String userName;
+    private String role;
+    private String email;
     private String password;
     private int id;
-    private ArrayList<Event> events = new ArrayList<>(); // List to store user's events
+    private ArrayList<Event> events = new ArrayList<>();
     private MessageService messageService;
 
     public User(int id, String userName, String password, String email, String role) {
-        this.userName = new SimpleStringProperty(userName);
-        this.role = new SimpleStringProperty(role);
-        this.email = new SimpleStringProperty(email);
+        this.userName = userName;
+        this.role = role;
+        this.email = email;
         this.id = id;
         this.password = password;
         this.messageService = new MessageService();
     }
 
-    // Getters and Setters
     public String getUserName() {
-        return userName.get();
+        return userName;
     }
 
+
     public String getRole() {
-        return role.get();
+        return role;
     }
 
     public int getId() {
@@ -43,7 +40,7 @@ public class User {
     }
 
     public String getEmail() {
-        return email.get();
+        return email;
     }
 
     public void setPassword(String password) {
@@ -54,40 +51,29 @@ public class User {
         return password;
     }
 
+
+
+
     public void setId(int id) {
         this.id = id;
     }
 
-    // ToString method to represent User data
+    // In the User class or its subclasses like Customer, ProjectManager, etc.
     @Override
     public String toString() {
         return getId() + "," + getUserName() + "," + getPassword() + "," + getEmail() + "," + getRole();
     }
 
-    // Add event to user's event list
-    public void addEvent(Event event) {
-        events.add(event);
-    }
 
-    // Remove event from user's event list
-    public boolean removeEvent(Event event) {
-        return events.remove(event);
-    }
-
-    // Get list of events associated with the user
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    // General method to send a message to any user (Customer or ServiceProvider)
+     // General method to send a message to any user (Customer or ServiceProvider) object
     public boolean sendMessage(User recipient, String messageContent) {
         // Create a new message with the current date
         Message message = new Message(
-                generateUniqueMessageId(),
-                messageContent,
-                this,           // Sender is now a User object
-                recipient,      // Receiver is now a User object
-                Message.getCurrentDate() // Use current date for the message
+            generateUniqueMessageId(),
+            messageContent,
+            this,           // Sender is now a User object
+            recipient,      // Receiver is now a User object
+            Message.getCurrentDate() // Use current date for the message
         );
 
         return messageService.addMessage(message);
@@ -110,40 +96,20 @@ public class User {
         // Filter messages where the ProjectManager is either the sender or receiver
         for (Message message : allMessages) {
             if ((message.getSender().getId() == this.getId() && message.getReceiver().getId() == user.getId()) ||
-                    (message.getReceiver().getId() == this.getId() && message.getSender().getId() == user.getId())) {
-                System.out.println("From: " + message.getSender().getUserName() + " | To: " + message.getReceiver().getUserName() +
-                        " | Message: " + message.getMessage() + " | Date: " + message.getDate());
+                (message.getReceiver().getId() == this.getId() && message.getSender().getId() == user.getId())) {
+                System.out.println("From: " + message.getSender().getUserName() + " | To: " + message.getReceiver().getUserName() + " | Message: " + message.getMessage() + " | Date: " + message.getDate());
             }
         }
     }
 
     // Method to generate a unique message ID based on a simple approach
     private int generateUniqueMessageId() {
-        String datePart = new SimpleDateFormat("yyyyMMdd").format(new Date());
+          String datePart = new SimpleDateFormat("yyyyMMdd").format(new Date());
         int randomPart = new Random().nextInt(100); // 2-digit random number (0-99)
 
         // Combine the date and random parts, ensuring it's smaller than Integer.MAX_VALUE
         String uniqueIdString = datePart.substring(2) + String.format("%02d", randomPart); // Get the last 6 digits of the date and add the random part
         return Integer.parseInt(uniqueIdString); // Convert to integer
     }
-
-    // Correct implementation for getUsername method
-    public String getUsername() {
-        return this.userName.get();
-    }
-
-    // Observable Properties
-    public StringProperty userNameProperty() {
-        return userName;
-    }
-
-    public StringProperty roleProperty() {
-        return role;
-    }
-
-    public StringProperty emailProperty() {
-        return email;
-    }
-
 
 }

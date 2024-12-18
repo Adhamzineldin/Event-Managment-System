@@ -20,25 +20,25 @@ public class AdminService {
             writer.newLine();
             return true;
         } catch (IOException e) {
-            System.err.println("Error while adding user: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
-
-    // Method to generate a unique ID using the current date and random number
+    // Method to generate a unique ID using the current date and random number (kept small)
     private int generateUniqueId() {
         String datePart = new SimpleDateFormat("yyyyMMdd").format(new Date());
         int randomPart = new Random().nextInt(100); // 2-digit random number (0-99)
 
         // Combine the date and random parts, ensuring it's smaller than Integer.MAX_VALUE
-        String uniqueIdString = datePart.substring(2) + String.format("%02d", randomPart);
-        return Integer.parseInt(uniqueIdString);
+        String uniqueIdString = datePart.substring(2) + String.format("%02d", randomPart); // Get the last 6 digits of the date and add the random part
+        return Integer.parseInt(uniqueIdString); // Convert to integer
     }
+
 
     // Method to remove a user by ID and role
     public boolean removeUser(int userId, String role) {
         List<User> users = getAllUsers();
-        boolean userRemoved = users.removeIf(user -> user.getId() == userId && user.getRole().equalsIgnoreCase(role));
+        boolean userRemoved = users.removeIf(user -> user.getId() == userId && user.getRole().equals(role));
 
         if (userRemoved) {
             return saveAllUsers(users);
@@ -55,12 +55,10 @@ public class AdminService {
                 User user = parseUser(line);
                 if (user != null) {
                     users.add(user);
-                } else {
-                    System.err.println("Error: Failed to parse user data: " + line);
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error while reading users file: " + e.getMessage());
+            e.printStackTrace();
         }
         return users;
     }
@@ -74,12 +72,12 @@ public class AdminService {
             }
             return true;
         } catch (IOException e) {
-            System.err.println("Error while saving users: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
 
-    // Method to view users based on role
+    // Methods to view users based on role
     public <T extends User> List<T> viewUsersByRole(Class<T> roleClass) {
         return getAllUsers().stream()
                 .filter(user -> roleClass.isInstance(user))
@@ -91,17 +89,13 @@ public class AdminService {
     private User parseUser(String userData) {
         String[] parts = userData.split(",");
         if (parts.length >= 5) {
-            try {
-                int id = Integer.parseInt(parts[0].trim());
-                String userName = parts[1].trim();
-                String password = parts[2].trim();
-                String email = parts[3].trim();
-                String role = parts[4].trim();
+            int id = Integer.parseInt(parts[0]);
+            String userName = parts[1];
+            String password = parts[2];
+            String email = parts[3];
+            String role = parts[4];
 
-                return UserFactory.createUser(id, userName, password, email, role.toLowerCase());
-            } catch (NumberFormatException e) {
-                System.err.println("Error: Invalid ID format for user data: " + userData);
-            }
+            return UserFactory.createUser(id, userName, password, email, role.toLowerCase());
         }
         return null;
     }
