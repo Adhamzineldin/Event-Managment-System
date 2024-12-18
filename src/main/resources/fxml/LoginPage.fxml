@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import java.net.URL?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.eventmanagmentsystem.controllers.LoginController">
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.eventmanagmentsystem.controllers.LoginController">
     <stylesheets>
         <URL value="@../css/login.css"/>
     </stylesheets>
 
-    <!-- Anchor the VBox to all sides of the AnchorPane -->
-    <VBox alignment="CENTER" spacing="20.0" fx:id="loginPane"
-          AnchorPane.topAnchor="50" AnchorPane.leftAnchor="100"
-          AnchorPane.rightAnchor="100" AnchorPane.bottomAnchor="50">
+    <!-- Main Form Container -->
+    <VBox alignment="CENTER" spacing="20" prefWidth="200" prefHeight="200">
+        <!-- Title Section -->
+        <Label text="Event Management System Login" id="formTitle" />
 
-        <Label text="Event Management System" fx:id="welcomeLabel"/>
-        <Label fx:id="alertLabel" styleClass="alert"  />
-        <TextField promptText="Username" fx:id="usernameField"/>
-        <PasswordField promptText="Password" fx:id="passwordField"/>
-        <Button text="Login" onAction="#handleLogin" />
-        <Button text="SignUp" onAction="#signUp"/>
+        <!-- Form Section -->
+        <VBox alignment="CENTER" spacing="15" id="formContainer">
+            <!-- Username Field -->
+            <TextField fx:id="usernameField" promptText="Enter Username" id="inputField"/>
+            <!-- Password Field -->
+            <PasswordField fx:id="passwordField" promptText="Enter Password" id="inputField"/>
+
+            <!-- Remember Me Checkbox -->
+            <CheckBox text="Remember me?" id="rememberMe"/>
+
+            <!-- Error Label -->
+            <Label fx:id="alertLabel" text="Invalid username or password!" id="errorLabel" opacity="0"/>
+
+            <!-- Login Button -->
+            <Button text="Login" onAction="#handleLogin" id="loginButton"/>
+        </VBox>
+
+        <!-- Forgot Password Link -->
+        <Hyperlink text="Forgot password?" id="forgotPassword"/>
+
+        <!-- Don't have an account? Link -->
+        <Hyperlink text="Don't have an account? Sign up here" id="signUpLink" onAction="#signUp"/>
     </VBox>
-</AnchorPane>
+</StackPane>

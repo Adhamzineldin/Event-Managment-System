@@ -1,0 +1,29 @@
+/* Basic styling for the Admin page */
+
+.table-view {
+    -fx-background-color: #F0F0F0;
+    -fx-font-size: 14px;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.text-field, .combo-box {
+    -fx-font-size: 14px;
+    -fx-background-color: #F0F0F0;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 4px;
+    -fx-padding: 5px;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}

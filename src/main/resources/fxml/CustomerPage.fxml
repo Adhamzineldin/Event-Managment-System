@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.eventmanagmentsystem.controllers.CustomerController"
-            prefHeight="400.0" prefWidth="600.0">
-
- <HBox spacing="10" alignment="CENTER_LEFT">
-    <Label fx:id="customerName" />
-    <Label fx:id="customerRole" />
-    <Label fx:id="customerEmail" />
-       <Button text="Logout" onAction="#handleLogout" />
-</HBox>
+<?import javafx.scene.text.*?>
 
 
-</AnchorPane>
+<?import java.net.URL?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.eventmanagmentsystem.controllers.CustomerController">
+    <!-- Include CSS File -->
+    <stylesheets>
+        <URL value="@../css/CustomerPage.css" />
+    </stylesheets>
+
+    <!-- Centered Root Container -->
+    <VBox spacing="30" alignment="CENTER" prefWidth="600" maxWidth="600" styleClass="rootContainer">
+
+        <!-- Customer Information Section -->
+        <VBox spacing="10" alignment="CENTER" styleClass="customerInfoSection">
+            <Text text="Customer Information" styleClass="sectionTitle" />
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Label text="Customer Name:" styleClass="label" />
+                <Label fx:id="customerName" styleClass="valueLabel" />
+            </HBox>
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Label text="Email:" styleClass="label" />
+                <Label fx:id="customerEmail" styleClass="valueLabel" />
+            </HBox>
+        </VBox>
+
+        <!-- Event Booking Form Section -->
+        <VBox spacing="20" alignment="CENTER" styleClass="formContainer">
+            <Text text="Event Booking Form" styleClass="formTitle" />
+
+            <TextField fx:id="eventDateField" promptText="Event Date (yyyy-MM-dd)" styleClass="inputField" />
+            <TextField fx:id="eventDurationField" promptText="Event Duration (hours)" styleClass="inputField" />
+            <TextField fx:id="seatsField" promptText="Number of Seats" styleClass="inputField" />
+
+            <TextArea fx:id="messageField" promptText="Message to Project Manager (optional)"
+                      wrapText="true" prefHeight="100" styleClass="inputArea" />
+
+            <!-- Buttons -->
+            <HBox spacing="15" alignment="CENTER">
+                <Button text="Book Event" onAction="#handleBookEvent" styleClass="primaryButton" />
+                <Button text="Manage Booking" onAction="#handleManageBooking" styleClass="secondaryButton" />
+                <Button text="Logout" onAction="#handleLogout" styleClass="logoutButton" />
+            </HBox>
+        </VBox>
+
+        <!-- Feedback Message -->
+        <Label fx:id="feedbackMessage" text="" styleClass="feedbackMessage" />
+    </VBox>
+</StackPane>

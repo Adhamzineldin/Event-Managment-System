@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.eventmanagmentsystem.models.User;
-import org.eventmanagmentsystem.services.GUIService;
 import org.eventmanagmentsystem.services.LoginService;
 
 import java.io.IOException;
@@ -20,9 +19,6 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordField;
-
-    @FXML
-    private Label welcomeLabel;
 
     @FXML
     private Label alertLabel;
@@ -37,10 +33,8 @@ public class LoginController {
             String role = user.getRole();
             FXMLLoader loader = new FXMLLoader();
 
-
-           String fxmlPath = "/fxml/" + role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() + "Page.fxml";
-           loader.setLocation(getClass().getResource(fxmlPath));
-
+            String fxmlPath = "/fxml/" + role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() + "Page.fxml";
+            loader.setLocation(getClass().getResource(fxmlPath));
 
             // Load the scene and set it in the stage
             Parent root = loader.load();
@@ -52,13 +46,13 @@ public class LoginController {
             // Pass the user data to the next controller
             if (role.equals("admin")) {
                 AdminController adminController = loader.getController();
-                adminController.setUser(user);
+                adminController.setUser(user);  // Set user in AdminController
             } else if (role.equals("customer")) {
                 CustomerController customerController = loader.getController();
                 customerController.setUser(user);
             }
         } else {
-            alertLabel.setOpacity(1);
+            alertLabel.setOpacity(1);  // Display error message
         }
     }
 
@@ -74,8 +68,5 @@ public class LoginController {
         stage.setWidth(previousWidth);
         stage.setHeight(previousHeight);
         stage.show();
-
-
-
     }
 }

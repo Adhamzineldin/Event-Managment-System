@@ -1,76 +1,91 @@
-/* General styling */
-AnchorPane {
-    -fx-background-color: #2C3E50;
-    -fx-font-family: 'Arial', sans-serif;
+/* Styling for the background image */
+.root {
+    -fx-background-image: url("../images/login.jpg"); /* Path to your image */
+    -fx-background-size: cover; /* Ensure the background covers the entire area */
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-pref-width: 100%; /* Take full width of the container */
+    -fx-pref-height: 100%; /* Take full height of the container */
 }
 
-/* VBox Styling */
-VBox {
-    -fx-background-color: #ECF0F1;
+/* Form container styling */
+#formContainer {
+    -fx-background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
     -fx-padding: 20;
     -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
-    -fx-min-width: 300;  /* Minimum width */
-    -fx-min-height: 250;  /* Minimum height */
-    -fx-max-width: 500;  /* Maximum width */
-    -fx-max-height: 400;  /* Maximum height */
-    -fx-pref-width: 100%;  /* Allow width to adapt to parent */
-    -fx-pref-height: 100%;  /* Allow height to adapt to parent */
-}
-
-/* Label Styling */
-Label {
-    -fx-text-fill: #34495E;
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
     -fx-alignment: center;
+    -fx-pref-width: 40%; /* 40% of the parent container's width */
+    -fx-pref-height: 50%; /* 50% of the parent container's height */
+    -fx-max-width: 500px; /* Maximum width */
+    -fx-max-height: 600px; /* Maximum height */
+    -fx-min-width: 250px; /* Minimum width */
+    -fx-min-height: 300px; /* Minimum height */
 }
 
-/* Input fields styling */
-TextField, PasswordField {
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
-    -fx-padding: 5;
-    -fx-border-color: #BDC3C7;
-    -fx-border-width: 1;
-    -fx-focus-color: #3498DB;
-    -fx-faint-focus-color: transparent;
-    -fx-pref-width: 250;
-}
-
-/* Button Styling */
-Button {
-    -fx-background-color: #3498DB;
-    -fx-text-fill: white;
-    -fx-background-radius: 5;
-    -fx-padding: 10 20;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-}
-
-/* Button Hover effect */
-Button:hover {
-    -fx-background-color: #2980B9;
-}
-
-/* Alert Label Styling */
-.alert {
-    -fx-text-fill: red;
+/* Input fields */
+#inputField {
+    -fx-pref-width: 100%; /* 100% of the form container width */
     -fx-font-size: 14px;
-    -fx-font-weight: normal;
-    -fx-alignment: center;
-    -fx-opacity: 0; /* Initially hidden */
-    -fx-transition: opacity 0.3s ease-in-out;
-    -fx-padding: 5px;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
 }
 
-/* Making VBox responsive */
-VBox {
-    -fx-min-width: 300;
-    -fx-min-height: 250;
-    -fx-max-width: 500;
-    -fx-max-height: 400;
-    -fx-pref-width: 100%;
-    -fx-pref-height: 100%;
+/* Username and password input fields */
+#usernameField, #passwordField {
+    -fx-pref-width: 100%; /* 100% of the form container width */
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+}
+
+/* Login button styling */
+#loginButton {
+    -fx-background-color: #007bff; /* Blue color */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 250px; /* 100% of the form container width */
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-border-color: #007bff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+/* Button hover effect */
+#loginButton:hover {
+    -fx-background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Forgot Password and Sign up links */
+#forgotPassword, #signUpLink {
+    -fx-text-fill: #007bff;
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-background-color: transparent;
+    -fx-underline: true;
+}
+
+/* Forgot Password and Sign up links hover effect */
+#forgotPassword:hover, #signUpLink:hover {
+    -fx-text-fill: #0056b3;
+}
+
+/* Title */
+#formTitle {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 20px 0;
+}
+
+/* Error message styling */
+#errorLabel {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+    -fx-opacity: 0; /* Initially hidden */
 }

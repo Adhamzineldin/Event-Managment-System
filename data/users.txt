@@ -1,5 +1,6 @@
-1,adminName,admin@123,mohalya3@gmail.com,admin
+1,a,a,mohalya3@gmail.com,admin
 2,customerName,customer@123,mohalya3@gmail.com,customer
-3,managerName,manager@123,mohalya3@gmail.com,manager
+3,m,m,mohalya3@gmail.com,manager
 4,provider,provider@123,mohalya3@gmail.com,serviceProvider
 24121464,lollol,12345678,lollol@gmail.com,customer
+24121686,c,c,opop53971@gmail.com,customer
