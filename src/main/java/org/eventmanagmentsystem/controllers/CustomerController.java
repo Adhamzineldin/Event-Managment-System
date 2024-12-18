@@ -60,7 +60,7 @@ public class CustomerController {
     @FXML
     public void initialize() {
         // Customize initialization if needed
-        showViewUpdateEvents();
+        showEventBooking();
 
         // Set up the table columns with manager information
         eventIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getEventId())));
@@ -132,26 +132,22 @@ public class CustomerController {
     @FXML
     private void sendChatMessage() {
         List<Event> events = this.customer.getEvents();
-        int managerId = events.getLast().getManagerId();
+        int managerId = events.get(events.size() - 1).getManagerId();
         User manager = userService.getUserById(managerId);
-        
         String message = chatInput.getText();
-         List<Message> messages = customer.getChatHistoryWithUser(manager);
-         for (Message msg : messages) {
-             chatMessages.appendText(msg.getSender().getUserName() + ": " + msg.getMessage() + "\n");
-         }
-        customer.sendMessage(manager, message);
-         
+       
+         customer.sendMessage(manager, message);
+         chatInput.clear();
          receiveChatMessage();
     }
     
     @FXML
     private void receiveChatMessage() {
+        
         List<Event> events = this.customer.getEvents();
-        int managerId = events.getLast().getManagerId();
+        int managerId = events.get(events.size() - 1).getManagerId();
         User manager = userService.getUserById(managerId);
         
-        chatMessages.clear();
         List<Message> messages = customer.getChatHistoryWithUser(manager);
         for (Message msg : messages) {
             System.out.println(msg.getSender().getUserName() + ": " + msg.getMessage());
