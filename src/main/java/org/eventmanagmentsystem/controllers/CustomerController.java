@@ -1,5 +1,6 @@
 package org.eventmanagmentsystem.controllers;
 
+import com.sun.source.doctree.SystemPropertyTree;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -132,6 +133,7 @@ public class CustomerController {
     @FXML
     private void sendChatMessage() {
         List<Event> events = this.customer.getEvents();
+        System.out.println(events.size());
         int managerId = events.get(events.size() - 1).getManagerId();
         User manager = userService.getUserById(managerId);
         String message = chatInput.getText();
@@ -150,8 +152,7 @@ public class CustomerController {
         
         List<Message> messages = customer.getChatHistoryWithUser(manager);
         for (Message msg : messages) {
-            System.out.println(msg.getSender().getUserName() + ": " + msg.getMessage());
-            chatMessages.appendText(msg.getSender().getUserName() + ": " + msg.getMessage() + "\n");
+            chatMessages.appendText(msg.getSender().getUserName() + ": " + msg.getMessage() + " " + msg.getDate() + "\n");
         }
     }
     
@@ -197,8 +198,7 @@ public class CustomerController {
         updateEventDurationField.clear();
         updateSeatsField.clear();
         updateEventIdField.clear();
-        updateManagerIdField.clear();
-        updateManagerNameField.clear();
+        handleViewAndUpdateEvents();
     }
 
     private double calculateCost(int duration, int seats) {
@@ -233,8 +233,7 @@ public class CustomerController {
             updateEventDateField.setText(new SimpleDateFormat("yyyy-MM-dd").format(event.getEventDate()));
             updateEventDurationField.setText(String.valueOf(event.getEventDuration()));
             updateSeatsField.setText(String.valueOf(event.getSeats()));
-            updateManagerIdField.setText(String.valueOf(event.getManagerId()));
-            updateManagerNameField.setText(userService.getUserById(event.getManagerId()).getUserName());
+           
         }
     }
 

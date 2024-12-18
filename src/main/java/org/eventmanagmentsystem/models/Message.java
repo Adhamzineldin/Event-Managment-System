@@ -1,5 +1,7 @@
 package org.eventmanagmentsystem.models;
 
+import org.eventmanagmentsystem.services.UserService;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -68,25 +70,43 @@ public class Message {
     }
 
     // Utility method to parse a string from the file and convert it to a Message object
-    public static Message parseMessage(String messageData, Map<Integer, User> users) {
-        String[] parts = messageData.split(",");
-        if (parts.length >= 5) {
-            int id = Integer.parseInt(parts[0]);
-            String message = parts[1];
-            int senderId = Integer.parseInt(parts[2]);
-            int receiverId = Integer.parseInt(parts[3]);
-            String date = parts[4];
+    public static Message parseMessage(String line, Map<Integer, User> users) {
+        try {
+            String[] parts = line.split(",", -1); // Split by commas, -1 keeps trailing empty elements
 
-            // Fetch User objects from a map (you need a way to retrieve users by their ID)
-            User sender = users.get(senderId);
-            User receiver = users.get(receiverId);
-
-            if (sender != null && receiver != null) {
-                return new Message(id, message, sender, receiver, date);
+            if (parts.length != 5) {
+                System.out.println("Invalid message format: " + line);
+                return null; // Invalid message format, return null
             }
+
+            // Parse the components
+            int messageId = Integer.parseInt(parts[0].trim());
+            String messageContent = parts[1].trim();
+            int senderId = Integer.parseInt(parts[2].trim());
+            int receiverId = Integer.parseInt(parts[3].trim());
+            String timestamp = parts[4].trim();
+
+            // Find the sender and receiver from the users map
+            UserService userService = new UserService();
+            
+            User sender = userService.getUserById(senderId);
+            User receiver = userService.getUserById(receiverId);
+
+            // If sender or receiver not found, return null
+            if (sender == null || receiver == null) {
+                System.out.println("User not found for senderId: " + senderId + " or receiverId: " + receiverId);
+                return null;
+            }
+
+            // Create a Message object with the parsed data
+            return new Message(messageId, messageContent, sender, receiver, timestamp);
+        } catch (Exception e) {
+            System.out.println("Error parsing message: " + line);
+            e.printStackTrace();
+            return null; // In case of any error, return null
         }
-        return null;
     }
+
 
     // Utility method to get the current date as a String in the desired format (e.g., yyyy-MM-dd HH:mm:ss)
     public static String getCurrentDate() {

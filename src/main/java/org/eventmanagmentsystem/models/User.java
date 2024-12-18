@@ -106,6 +106,7 @@ public abstract class User {
     // Method to get all chat history with a user (Customer or ServiceProvider)
     public List<Message> getChatHistoryWithUser(User user) {
         List<Message> allMessages = messageService.getAllMessages();
+        
 
         // Filter messages where the ProjectManager is either the sender or receiver
         for (Message message : allMessages) {

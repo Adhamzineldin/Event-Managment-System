@@ -43,6 +43,7 @@
                     <TableColumn text="Manager" fx:id="managerNameColumn" />
                 </columns>
             </TableView>
+            <TextField fx:id="updateEventIdField" promptText="ID" styleClass="inputField" disable="true" />
             <TextField fx:id="updateEventDateField" promptText="New Event Date (yyyy-MM-dd)" styleClass="inputField" />
             <TextField fx:id="updateEventDurationField" promptText="New Duration (hours)" styleClass="inputField" />
             <TextField fx:id="updateSeatsField" promptText="New Number of Seats" styleClass="inputField" />

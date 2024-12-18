@@ -12,6 +12,7 @@ module org.example.eventmanagmentsystem {
     requires com.almasb.fxgl.all;
     requires javax.mail.api;
     requires java.desktop;
+    requires jdk.compiler;
 
 
     exports org.eventmanagmentsystem.app;

@@ -39,19 +39,23 @@ public class MessageService {
         List<Message> messages = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
-            Map<Integer, User> users = getUsersMap(); // Get a map of all users (you need to define getUsersMap)
+            Map<Integer, User> users = getUsersMap(); // Get a map of all users
 
             while ((line = reader.readLine()) != null) {
                 Message message = Message.parseMessage(line, users);
-                if (message != null) {
+                if (message == null) {
+                    System.out.println("Failed to parse message: " + line);
+                } else {
                     messages.add(message);
                 }
             }
         } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
             e.printStackTrace();
         }
         return messages;
     }
+
 
     // Method to save all messages to the file
     private boolean saveAllMessages(List<Message> messages) {
