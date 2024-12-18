@@ -50,4 +50,21 @@ public class Admin extends User {
         List<Customer> customers = adminService.viewUsersByRole(Customer.class);
         return customers;
     }
+
+    public List<User> getAllUsers() {
+        List<User> users = adminService.getAllUsers();
+        return users;
+    }
+
+    public boolean addUser(User user) {
+        return adminService.addUser(user);
+    }
+
+    public boolean removeUser(int id, String role) {
+        return adminService.removeUser(id, role);
+    }
+    
+    public boolean updateUser(User user) {
+        return adminService.updateUser(user);
+    }
 }

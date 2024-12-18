@@ -11,15 +11,20 @@
         <Label text="Admin Dashboard" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #4A90E2;"/>
 
         <!-- User Table -->
-        <TableView fx:id="userTableView" prefWidth="600" prefHeight="400">
-            <TableColumn fx:id="usernameColumn" text="Username" prefWidth="300"/>
-            <TableColumn fx:id="roleColumn" text="Role" prefWidth="300"/>
+        <TableView fx:id="userTableView">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" />
+                <TableColumn fx:id="usernameColumn" text="Username" />
+                <TableColumn fx:id="passwordColumn" text="Password" />
+                <TableColumn fx:id="emailColumn" text="Email" />
+                <TableColumn fx:id="roleColumn" text="Role" />
+            </columns>
         </TableView>
 
         <!-- Search Section -->
         <HBox spacing="10">
             <TextField fx:id="searchField" promptText="Search users" prefWidth="300"/>
-            <Button text="Search" style="-fx-background-color: #4A90E2; -fx-text-fill: white;"/>
+            <Button text="Search" onAction="#searchUsers" style="-fx-background-color: #4A90E2; -fx-text-fill: white; "/>
         </HBox>
 
         <!-- Add User Section -->
@@ -28,12 +33,16 @@
             <TextField fx:id="emailField" promptText="Email" prefWidth="200"/>
             <PasswordField fx:id="passwordField" promptText="Password" prefWidth="200"/> <!-- Password Field -->
             <ComboBox fx:id="userRoleComboBox" promptText="Select Role" prefWidth="200"/>
-            <Button fx:id="addButton" text="Add User" onAction="#addUser" style="-fx-background-color: #4A90E2; -fx-text-fill: white;"/>
+            
         </HBox>
 
         <!-- Remove User Section -->
         <HBox spacing="10">
+            <Button fx:id="signOutButton" layoutX="350.0" layoutY="460.0" text="Sign Out" onAction="#signOut" visible="true" />
+            <Button fx:id="addButton" text="Add User" onAction="#addUser" style="-fx-background-color: #4A90E2; -fx-text-fill: white;"/>
             <Button fx:id="removeButton" text="Remove User" onAction="#removeUser" style="-fx-background-color: #E74C3C; -fx-text-fill: white;"/>
+            <Button fx:id="saveButton" layoutX="350.0" layoutY="460.0" text="Save Changes" onAction="#saveUserChanges" visible="false" />
+            
         </HBox>
 
         <!-- Status Label -->

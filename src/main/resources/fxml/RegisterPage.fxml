@@ -40,8 +40,8 @@
 
         <!-- Button Section -->
         <HBox spacing="15" alignment="CENTER" styleClass="button-container">
-            <Button text="Register" onAction="#Register" styleClass="primary-button" />
-            <Button text="Login" onAction="#goToLogin" styleClass="secondary-button" />
+            <Button text="Register" onAction="#onRegister" styleClass="primary-button" />
+            <Button text="Login" onAction="#onLogin" styleClass="secondary-button" />
         </HBox>
     </VBox>
 </AnchorPane>

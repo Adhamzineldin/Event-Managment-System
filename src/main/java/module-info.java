@@ -11,6 +11,7 @@ module org.example.eventmanagmentsystem {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires javax.mail.api;
+    requires java.desktop;
 
 
     exports org.eventmanagmentsystem.app;

@@ -2,47 +2,58 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
-
 <?import java.net.URL?>
+
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.eventmanagmentsystem.controllers.CustomerController">
     <!-- Include CSS File -->
     <stylesheets>
         <URL value="@../css/CustomerPage.css" />
     </stylesheets>
 
-    <!-- Centered Root Container -->
-    <VBox spacing="30" alignment="CENTER" prefWidth="600" maxWidth="600" styleClass="rootContainer">
+    <!-- Root Container -->
+    <VBox spacing="20" alignment="CENTER" prefWidth="800" maxWidth="800" styleClass="rootContainer">
 
-        <!-- Customer Information Section -->
-        <VBox spacing="10" alignment="CENTER" styleClass="customerInfoSection">
-            <Text text="Customer Information" styleClass="sectionTitle" />
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label text="Customer Name:" styleClass="label" />
-                <Label fx:id="customerName" styleClass="valueLabel" />
-            </HBox>
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label text="Email:" styleClass="label" />
-                <Label fx:id="customerEmail" styleClass="valueLabel" />
-            </HBox>
-        </VBox>
+        <!-- Navigation Buttons -->
+        <HBox spacing="15" alignment="CENTER">
+            <Button text="Book Event" onAction="#showEventBooking" styleClass="navButton" />
+            <Button text="View/Update Events" onAction="#showViewUpdateEvents" styleClass="navButton" />
+            <Button text="Chat with Manager" onAction="#showChatSection" styleClass="navButton" />
+        </HBox>
 
-        <!-- Event Booking Form Section -->
-        <VBox spacing="20" alignment="CENTER" styleClass="formContainer">
-            <Text text="Event Booking Form" styleClass="formTitle" />
-
+        <!-- Book Event Section -->
+        <VBox fx:id="eventBookingSection" spacing="20" alignment="CENTER" visible="false" managed="false" styleClass="formContainer">
+            <Text text="Book an Event" styleClass="formTitle" />
             <TextField fx:id="eventDateField" promptText="Event Date (yyyy-MM-dd)" styleClass="inputField" />
             <TextField fx:id="eventDurationField" promptText="Event Duration (hours)" styleClass="inputField" />
             <TextField fx:id="seatsField" promptText="Number of Seats" styleClass="inputField" />
+            <TextArea fx:id="messageField" promptText="Message to Manager (optional)" wrapText="true" prefHeight="100" styleClass="inputArea" />
+            <Button text="Book Event" onAction="#handleBookEvent" styleClass="primaryButton" />
+        </VBox>
 
-            <TextArea fx:id="messageField" promptText="Message to Project Manager (optional)"
-                      wrapText="true" prefHeight="100" styleClass="inputArea" />
+        <!-- View and Update Events Section -->
+        <VBox fx:id="viewUpdateEventsSection" spacing="20" alignment="CENTER" visible="false" managed="false" styleClass="viewContainer">
+            <Text text="View and Update Events" styleClass="sectionTitle" />
+            <TableView fx:id="eventsTable" prefHeight="200" styleClass="eventsTable">
+                <columns>
+                    <TableColumn text="Event ID" fx:id="eventIdColumn" />
+                    <TableColumn text="Event Date" fx:id="eventDateColumn" />
+                    <TableColumn text="Duration" fx:id="eventDurationColumn" />
+                    <TableColumn text="Seats" fx:id="eventSeatsColumn" />
+                </columns>
+            </TableView>
+            <TextField fx:id="updateEventDateField" promptText="New Event Date (yyyy-MM-dd)" styleClass="inputField" />
+            <TextField fx:id="updateEventDurationField" promptText="New Duration (hours)" styleClass="inputField" />
+            <TextField fx:id="updateSeatsField" promptText="New Number of Seats" styleClass="inputField" />
+            <Button text="Update Event" onAction="#handleUpdateEvent" styleClass="primaryButton" />
+        </VBox>
 
-            <!-- Buttons -->
-            <HBox spacing="15" alignment="CENTER">
-                <Button text="Book Event" onAction="#handleBookEvent" styleClass="primaryButton" />
-                <Button text="Manage Booking" onAction="#handleManageBooking" styleClass="secondaryButton" />
-                <Button text="Logout" onAction="#handleLogout" styleClass="logoutButton" />
+        <!-- Chat with Project Manager Section -->
+        <VBox fx:id="chatSection" spacing="20" alignment="CENTER" visible="false" managed="false" styleClass="chatContainer">
+            <Text text="Chat with Project Manager" styleClass="sectionTitle" />
+            <TextArea fx:id="chatMessages" editable="false" wrapText="true" prefHeight="200" styleClass="chatMessages" />
+            <HBox spacing="10">
+                <TextField fx:id="chatInput" promptText="Type your message here..." styleClass="chatInput" />
+                <Button text="Send" onAction="#sendChatMessage" styleClass="primaryButton" />
             </HBox>
         </VBox>
 

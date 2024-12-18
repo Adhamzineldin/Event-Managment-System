@@ -99,4 +99,15 @@ public class AdminService {
         }
         return null;
     }
+
+    public boolean updateUser(User user) {
+        List<User> users = getAllUsers();
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getId() == user.getId()) {
+                users.set(i, user);
+                return saveAllUsers(users);
+            }
+        }
+        return false;
+    }
 }

@@ -67,6 +67,8 @@ public class Customer extends User {
         return eventService.updateEvent(eventId, eventDate, eventDuration, seats, cost, serviceProviderCost);
     }
 
+ 
+
     // Placeholder method to simulate payment for the event
     public boolean payEvent(int eventId) {
         return true; // In a real implementation, this would process payment
