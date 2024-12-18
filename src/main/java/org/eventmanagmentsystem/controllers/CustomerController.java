@@ -1,18 +1,24 @@
 package org.eventmanagmentsystem.controllers;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.eventmanagmentsystem.models.Customer;
 import org.eventmanagmentsystem.models.Event;
+import org.eventmanagmentsystem.models.Message;
 import org.eventmanagmentsystem.models.User;
+import org.eventmanagmentsystem.services.UserService;
 
 import javax.swing.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+
 
 public class CustomerController {
 
@@ -34,16 +40,42 @@ public class CustomerController {
     @FXML private TextField updateEventDurationField;
     @FXML private TextField updateSeatsField;
     @FXML private TextField updateEventIdField;
+    @FXML private TextField updateManagerIdField;   // New Manager ID field
+    @FXML private TextField updateManagerNameField; // New Manager Name field
 
     // Chat Section Fields
     @FXML private TextArea chatMessages;
     @FXML private TextField chatInput;
 
+    @FXML private TableColumn<Event, String> eventIdColumn;
+    @FXML private TableColumn<Event, Date> eventDateColumn;
+    @FXML private TableColumn<Event, Integer> eventDurationColumn;
+    @FXML private TableColumn<Event, Integer> eventSeatsColumn;
+    @FXML private TableColumn<Event, Integer> managerIdColumn;    // New Manager ID column
+    @FXML private TableColumn<Event, String> managerNameColumn;  // New Manager Name column
+
     private Customer customer;
+    UserService userService = new UserService();
 
     @FXML
     public void initialize() {
-        // This can be customized further if needed
+        // Customize initialization if needed
+        showViewUpdateEvents();
+
+        // Set up the table columns with manager information
+        eventIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getEventId())));
+        eventDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEventDate()));
+        eventDurationColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEventDuration()));
+        eventSeatsColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getSeats()));
+        managerIdColumn.setCellValueFactory(cellData -> new SimpleObjectProperty(String.valueOf(cellData.getValue().getManagerId())));
+        managerNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(userService.getUserById(cellData.getValue().getManagerId()).getUserName()));
+
+        // Add a listener for selecting a row and filling the fields
+        eventsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                populateUpdateFields(newValue);
+            }
+        });
     }
 
     @FXML
@@ -59,7 +91,7 @@ public class CustomerController {
                 return;
             }
 
-            Event event = new Event(1, eventDate, duration, seats, calculateCost(duration, seats), "Pending", calculateServiceProviderCost(duration, seats));
+            Event event = new Event(customer.getId(), eventDate, duration, seats, calculateCost(duration, seats), "Pending", calculateServiceProviderCost(duration, seats));
             customer.bookEvent(event);
             clearBookingFields();
             showFeedback(feedbackMessage, "Event booked successfully!", "success");
@@ -71,14 +103,17 @@ public class CustomerController {
 
     @FXML
     private void handleViewAndUpdateEvents() {
-        List<Event> events = customer.getEvents();
+        List<Event> events = this.customer.getEvents();
+
+        for (Event event : events) {
+            System.out.println(event);
+        }
         eventsTable.getItems().setAll(events);
     }
 
     @FXML
     private void handleUpdateEvent() {
         try {
-            
             int eventId = Integer.parseInt(updateEventIdField.getText());
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date eventDate = dateFormat.parse(updateEventDateField.getText());
@@ -100,15 +135,38 @@ public class CustomerController {
 
     @FXML
     private void sendChatMessage() {
+        List<Event> events = this.customer.getEvents();
+        int managerId = events.getLast().getManagerId();
+        User manager = userService.getUserById(managerId);
+        
         String message = chatInput.getText();
-        if (!message.isEmpty()) {
-            chatMessages.appendText("You: " + message + "\n");
-            chatInput.clear();
+         List<Message> messages = customer.getChatHistoryWithUser(manager);
+         for (Message msg : messages) {
+             chatMessages.appendText(msg.getSender().getUserName() + ": " + msg.getMessage() + "\n");
+         }
+        customer.sendMessage(manager, message);
+         
+         receiveChatMessage();
+    }
+    
+    @FXML
+    private void receiveChatMessage() {
+        List<Event> events = this.customer.getEvents();
+        int managerId = events.getLast().getManagerId();
+        User manager = userService.getUserById(managerId);
+        
+        chatMessages.clear();
+        List<Message> messages = manager.getChatHistoryWithUser(customer);
+        for (Message msg : messages) {
+            chatMessages.appendText(msg.getSender().getUserName() + ": " + msg.getMessage() + "\n");
         }
     }
+    
+    
 
     @FXML
     private void showEventBooking() {
+        handleViewAndUpdateEvents();
         switchSection(eventBookingSection);
     }
 
@@ -120,6 +178,7 @@ public class CustomerController {
     @FXML
     private void showChatSection() {
         switchSection(chatSection);
+        receiveChatMessage();
     }
 
     private void switchSection(VBox section) {
@@ -143,6 +202,9 @@ public class CustomerController {
         updateEventDateField.clear();
         updateEventDurationField.clear();
         updateSeatsField.clear();
+        updateEventIdField.clear();
+        updateManagerIdField.clear();
+        updateManagerNameField.clear();
     }
 
     private double calculateCost(int duration, int seats) {
@@ -169,4 +231,17 @@ public class CustomerController {
             handleViewAndUpdateEvents();
         }
     }
+
+    // Populates update fields when an event is clicked
+    private void populateUpdateFields(Event event) {
+        if (event != null) {
+            updateEventIdField.setText(String.valueOf(event.getEventId()));
+            updateEventDateField.setText(new SimpleDateFormat("yyyy-MM-dd").format(event.getEventDate()));
+            updateEventDurationField.setText(String.valueOf(event.getEventDuration()));
+            updateSeatsField.setText(String.valueOf(event.getSeats()));
+            updateManagerIdField.setText(String.valueOf(event.getManagerId()));
+            updateManagerNameField.setText(userService.getUserById(event.getManagerId()).getUserName());
+        }
+    }
+
 }

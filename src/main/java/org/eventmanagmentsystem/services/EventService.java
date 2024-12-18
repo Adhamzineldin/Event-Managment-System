@@ -242,6 +242,8 @@ public class EventService {
                 userEvents.add(event); // User is the service provider
             }
         }
+        
+       
 
         return userEvents;
     }

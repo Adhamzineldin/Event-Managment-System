@@ -39,6 +39,8 @@
                     <TableColumn text="Event Date" fx:id="eventDateColumn" />
                     <TableColumn text="Duration" fx:id="eventDurationColumn" />
                     <TableColumn text="Seats" fx:id="eventSeatsColumn" />
+                    <TableColumn text="Manger ID" fx:id="managerIdColumn" />
+                    <TableColumn text="Manager" fx:id="managerNameColumn" />
                 </columns>
             </TableView>
             <TextField fx:id="updateEventDateField" promptText="New Event Date (yyyy-MM-dd)" styleClass="inputField" />

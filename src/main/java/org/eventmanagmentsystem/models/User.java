@@ -104,7 +104,7 @@ public abstract class User {
     }
 
     // Method to get all chat history with a user (Customer or ServiceProvider)
-    public void getChatHistoryWithUser(User user) {
+    public List<Message> getChatHistoryWithUser(User user) {
         List<Message> allMessages = messageService.getAllMessages();
 
         // Filter messages where the ProjectManager is either the sender or receiver
@@ -114,6 +114,8 @@ public abstract class User {
                 System.out.println("From: " + message.getSender().getUserName() + " | To: " + message.getReceiver().getUserName() + " | Message: " + message.getMessage() + " | Date: " + message.getDate());
             }
         }
+        
+        return allMessages;
     }
 
     // Method to generate a unique message ID based on a simple approach

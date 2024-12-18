@@ -40,7 +40,11 @@ public class LoginController {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = (Stage) usernameField.getScene().getWindow();
+            double previousWidth = stage.getWidth();
+            double previousHeight = stage.getHeight();
             stage.setScene(scene);
+            stage.setWidth(previousWidth);
+            stage.setHeight(previousHeight);
             stage.show();
 
             // Pass the user data to the appropriate controller
