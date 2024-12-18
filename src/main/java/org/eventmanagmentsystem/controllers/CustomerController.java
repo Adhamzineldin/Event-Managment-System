@@ -104,10 +104,6 @@ public class CustomerController {
     @FXML
     private void handleViewAndUpdateEvents() {
         List<Event> events = this.customer.getEvents();
-
-        for (Event event : events) {
-            System.out.println(event);
-        }
         eventsTable.getItems().setAll(events);
     }
 
@@ -156,8 +152,9 @@ public class CustomerController {
         User manager = userService.getUserById(managerId);
         
         chatMessages.clear();
-        List<Message> messages = manager.getChatHistoryWithUser(customer);
+        List<Message> messages = customer.getChatHistoryWithUser(manager);
         for (Message msg : messages) {
+            System.out.println(msg.getSender().getUserName() + ": " + msg.getMessage());
             chatMessages.appendText(msg.getSender().getUserName() + ": " + msg.getMessage() + "\n");
         }
     }
@@ -166,12 +163,13 @@ public class CustomerController {
 
     @FXML
     private void showEventBooking() {
-        handleViewAndUpdateEvents();
+       
         switchSection(eventBookingSection);
     }
 
     @FXML
     private void showViewUpdateEvents() {
+        handleViewAndUpdateEvents();
         switchSection(viewUpdateEventsSection);
     }
 
