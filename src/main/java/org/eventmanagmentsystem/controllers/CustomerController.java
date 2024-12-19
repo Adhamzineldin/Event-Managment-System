@@ -3,10 +3,15 @@ package org.eventmanagmentsystem.controllers;
 import com.sun.source.doctree.SystemPropertyTree;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.eventmanagmentsystem.models.Customer;
 import org.eventmanagmentsystem.models.Event;
 import org.eventmanagmentsystem.models.Message;
@@ -14,6 +19,7 @@ import org.eventmanagmentsystem.models.User;
 import org.eventmanagmentsystem.services.UserService;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -151,6 +157,7 @@ public class CustomerController {
         User manager = userService.getUserById(managerId);
         
         List<Message> messages = customer.getChatHistoryWithUser(manager);
+        chatMessages.clear();
         for (Message msg : messages) {
             chatMessages.appendText(msg.getSender().getUserName() + ": " + msg.getMessage() + " " + msg.getDate() + "\n");
         }
@@ -237,4 +244,29 @@ public class CustomerController {
         }
     }
 
+
+    public void signOut(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/LoginPage.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) updateSeatsField.getScene().getWindow();
+        double previousWidth = stage.getWidth();
+        double previousHeight = stage.getHeight();
+        stage.setScene(scene);
+        stage.setWidth(previousWidth);
+        stage.setHeight(previousHeight);
+        stage.show();
+    }
+
+    public void handleCancelEvent(ActionEvent actionEvent) {
+        int eventId = Integer.parseInt(updateEventIdField.getText());
+        boolean status = customer.cancelEvent(eventId);
+        if (status) {
+            showFeedback(feedbackMessage, "Event cancelled successfully!", "success");
+            clearUpdateFields();
+        } else {
+            showFeedback(feedbackMessage, "Event not found.", "error");
+        }
+    }
 }

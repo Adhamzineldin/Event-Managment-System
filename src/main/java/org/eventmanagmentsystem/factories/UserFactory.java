@@ -9,7 +9,7 @@ public class UserFactory {
             case "admin" -> new Admin(id, username,password, email, role);
             case "customer" -> new Customer(id, username,password, email, role);
             case "manager" -> new ProjectManager(id, username,password, email, role);
-            case "serviceprovider" -> new ServiceProvider(id, username, password, email, role);
+            case "provider" -> new ServiceProvider(id, username, password, email, role);
             case null, default -> throw new IllegalArgumentException("Invalid role: " + role);
         };
     }

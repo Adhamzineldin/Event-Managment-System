@@ -29,7 +29,7 @@ public class Admin extends User {
     }
 
     public boolean removeServiceProvider(int serviceProviderId) {
-        return adminService.removeUser(serviceProviderId, "serviceProvider");
+        return adminService.removeUser(serviceProviderId, "provider");
     }
 
     public boolean removeCustomer(int customerId) {

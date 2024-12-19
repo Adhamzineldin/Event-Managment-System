@@ -18,6 +18,8 @@
             <Button text="Book Event" onAction="#showEventBooking" styleClass="navButton" />
             <Button text="View/Update Events" onAction="#showViewUpdateEvents" styleClass="navButton" />
             <Button text="Chat with Manager" onAction="#showChatSection" styleClass="navButton" />
+            <Button text="Sign Out" onAction="#signOut" styleClass="dangerButton" />
+            
         </HBox>
 
         <!-- Book Event Section -->
@@ -48,6 +50,7 @@
             <TextField fx:id="updateEventDurationField" promptText="New Duration (hours)" styleClass="inputField" />
             <TextField fx:id="updateSeatsField" promptText="New Number of Seats" styleClass="inputField" />
             <Button text="Update Event" onAction="#handleUpdateEvent" styleClass="primaryButton" />
+            <Button text="Cancel Event" onAction="#handleCancelEvent" styleClass="dangerButton" />
         </VBox>
 
         <!-- Chat with Project Manager Section -->

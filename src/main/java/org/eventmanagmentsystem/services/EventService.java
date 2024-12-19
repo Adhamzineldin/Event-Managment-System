@@ -159,7 +159,7 @@ public class EventService {
         for (User user : users) {
             if (Objects.equals(user.getRole(), "manager")) {
                 managers.add(user);
-            } else if (Objects.equals(user.getRole(), "serviceProvider")) {
+            } else if (Objects.equals(user.getRole(), "provider")) {
                 serviceProviders.add(user);
             }
         }
