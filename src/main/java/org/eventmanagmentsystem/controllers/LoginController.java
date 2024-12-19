@@ -32,9 +32,19 @@ public class LoginController {
         if (user != null) {  // If login is successful
             String role = user.getRole();
             FXMLLoader loader = new FXMLLoader();
+            
+            
+            System.out.println(role);
+            if (role.equals("provider")) {
+                loader.setLocation(getClass().getResource("/fxml/ServiceProviderPage.fxml"));
+            } else {
+                loader.setLocation(getClass().getResource("/fxml/" + role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() + "Page.fxml"));
+                
+            }
 
-            String fxmlPath = "/fxml/" + role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() + "Page.fxml";
-            loader.setLocation(getClass().getResource(fxmlPath));
+            
+//            String fxmlPath = "/fxml/" + role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() + "Page.fxml";
+//            loader.setLocation(getClass().getResource(fxmlPath));
 
             // Load the scene and set it in the stage
             Parent root = loader.load();
