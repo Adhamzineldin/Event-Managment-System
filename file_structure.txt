@@ -1,0 +1,150 @@
+.
+├── ./.git
+│   ├── ./.git/FETCH_HEAD
+│   ├── ./.git/HEAD
+│   ├── ./.git/branches
+│   ├── ./.git/config
+│   ├── ./.git/description
+│   ├── ./.git/hooks
+│   │   ├── ./.git/hooks/applypatch-msg.sample
+│   │   ├── ./.git/hooks/commit-msg.sample
+│   │   ├── ./.git/hooks/fsmonitor-watchman.sample
+│   │   ├── ./.git/hooks/post-update.sample
+│   │   ├── ./.git/hooks/pre-applypatch.sample
+│   │   ├── ./.git/hooks/pre-commit.sample
+│   │   ├── ./.git/hooks/pre-merge-commit.sample
+│   │   ├── ./.git/hooks/pre-push.sample
+│   │   ├── ./.git/hooks/pre-rebase.sample
+│   │   ├── ./.git/hooks/pre-receive.sample
+│   │   ├── ./.git/hooks/prepare-commit-msg.sample
+│   │   ├── ./.git/hooks/push-to-checkout.sample
+│   │   ├── ./.git/hooks/sendemail-validate.sample
+│   │   └── ./.git/hooks/update.sample
+│   ├── ./.git/index
+│   ├── ./.git/info
+│   │   └── ./.git/info/exclude
+│   ├── ./.git/lfs
+│   │   └── ./.git/lfs/tmp
+│   ├── ./.git/logs
+│   │   ├── ./.git/logs/HEAD
+│   │   └── ./.git/logs/refs
+│   │       ├── ./.git/logs/refs/heads
+│   │       │   └── ./.git/logs/refs/heads/master
+│   │       └── ./.git/logs/refs/remotes
+│   │           └── ./.git/logs/refs/remotes/origin
+│   │               └── ./.git/logs/refs/remotes/origin/HEAD
+│   ├── ./.git/objects
+│   │   ├── ./.git/objects/info
+│   │   └── ./.git/objects/pack
+│   │       ├── ./.git/objects/pack/pack-1891a1f146a23ccca4f794f7d18ac91fc55038af.idx
+│   │       ├── ./.git/objects/pack/pack-1891a1f146a23ccca4f794f7d18ac91fc55038af.pack
+│   │       ├── ./.git/objects/pack/pack-1891a1f146a23ccca4f794f7d18ac91fc55038af.rev
+│   │       ├── ./.git/objects/pack/pack-a821489b3718a476bb888adf36ac7ae33af713f3.idx
+│   │       ├── ./.git/objects/pack/pack-a821489b3718a476bb888adf36ac7ae33af713f3.pack
+│   │       └── ./.git/objects/pack/pack-a821489b3718a476bb888adf36ac7ae33af713f3.rev
+│   ├── ./.git/packed-refs
+│   └── ./.git/refs
+│       ├── ./.git/refs/heads
+│       │   └── ./.git/refs/heads/master
+│       ├── ./.git/refs/remotes
+│       │   └── ./.git/refs/remotes/origin
+│       │       └── ./.git/refs/remotes/origin/HEAD
+│       └── ./.git/refs/tags
+├── ./.gitignore
+├── ./.idea
+│   ├── ./.idea/.gitignore
+│   ├── ./.idea/artifacts
+│   │   └── ./.idea/artifacts/Event_Managment_System_jar.xml
+│   ├── ./.idea/cssdialects.xml
+│   ├── ./.idea/encodings.xml
+│   ├── ./.idea/git_toolbox_blame.xml
+│   ├── ./.idea/git_toolbox_prj.xml
+│   ├── ./.idea/inspectionProfiles
+│   │   └── ./.idea/inspectionProfiles/Project_Default.xml
+│   ├── ./.idea/material_theme_project_new.xml
+│   ├── ./.idea/misc.xml
+│   └── ./.idea/vcs.xml
+├── ./.mvn
+│   └── ./.mvn/wrapper
+│       └── ./.mvn/wrapper/maven-wrapper.properties
+├── ./data
+│   ├── ./data/events.txt
+│   ├── ./data/messages.txt
+│   └── ./data/users.txt
+├── ./dependency-reduced-pom.xml
+├── ./file_structure.txt
+├── ./mvnw
+├── ./mvnw.cmd
+├── ./nbactions.xml
+├── ./pom.xml
+└── ./src
+    └── ./src/main
+        ├── ./src/main/java
+        │   ├── ./src/main/java/module-info.java
+        │   └── ./src/main/java/org
+        │       └── ./src/main/java/org/eventmanagmentsystem
+        │           ├── ./src/main/java/org/eventmanagmentsystem/app
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/app/Main.java
+        │           │   └── ./src/main/java/org/eventmanagmentsystem/app/Test.java
+        │           ├── ./src/main/java/org/eventmanagmentsystem/controllers
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/controllers/AdminController.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/controllers/CustomerController.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/controllers/LoginController.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/controllers/ProjectManagerController.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/controllers/RegisterController.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/controllers/ServiceProviderController.java
+        │           │   └── ./src/main/java/org/eventmanagmentsystem/controllers/TestController.java
+        │           ├── ./src/main/java/org/eventmanagmentsystem/factories
+        │           │   └── ./src/main/java/org/eventmanagmentsystem/factories/UserFactory.java
+        │           ├── ./src/main/java/org/eventmanagmentsystem/interfaces
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/interfaces/EmailService.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/interfaces/Notifiable.java
+        │           │   └── ./src/main/java/org/eventmanagmentsystem/interfaces/Validator.java
+        │           ├── ./src/main/java/org/eventmanagmentsystem/models
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/models/Admin.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/models/Customer.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/models/EmptyUser.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/models/Event.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/models/Message.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/models/ProjectManager.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/models/ServiceProvider.java
+        │           │   └── ./src/main/java/org/eventmanagmentsystem/models/User.java
+        │           ├── ./src/main/java/org/eventmanagmentsystem/services
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/services/AdminService.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/services/EventService.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/services/GUIService.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/services/LoginService.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/services/MessageService.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/services/PricingService.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/services/RegisterService.java
+        │           │   ├── ./src/main/java/org/eventmanagmentsystem/services/SmtpEmailService.java
+        │           │   └── ./src/main/java/org/eventmanagmentsystem/services/UserService.java
+        │           └── ./src/main/java/org/eventmanagmentsystem/utils
+        │               ├── ./src/main/java/org/eventmanagmentsystem/utils/DatabaseUtil.java
+        │               ├── ./src/main/java/org/eventmanagmentsystem/utils/LoggerUtil.java
+        │               └── ./src/main/java/org/eventmanagmentsystem/utils/ValidatorUtil.java
+        └── ./src/main/resources
+            ├── ./src/main/resources/META-INF
+            │   └── ./src/main/resources/META-INF/MANIFEST.MF
+            ├── ./src/main/resources/css
+            │   ├── ./src/main/resources/css/CustomerPage.css
+            │   ├── ./src/main/resources/css/adminPage.css
+            │   ├── ./src/main/resources/css/login.css
+            │   └── ./src/main/resources/css/register.css
+            ├── ./src/main/resources/fxml
+            │   ├── ./src/main/resources/fxml/AdminPage.fxml
+            │   ├── ./src/main/resources/fxml/CustomerPage.fxml
+            │   ├── ./src/main/resources/fxml/LoginPage.fxml
+            │   ├── ./src/main/resources/fxml/ProjectManagerPage.fxml
+            │   ├── ./src/main/resources/fxml/RegisterPage.fxml
+            │   ├── ./src/main/resources/fxml/ServiceProviderPage.fxml
+            │   └── ./src/main/resources/fxml/TestPage.fxml
+            └── ./src/main/resources/images
+                ├── ./src/main/resources/images/123.jpg
+                ├── ./src/main/resources/images/event.jpg
+                ├── ./src/main/resources/images/eventmanagementsystem.jpeg
+                ├── ./src/main/resources/images/icon.ico
+                ├── ./src/main/resources/images/icon.png
+                └── ./src/main/resources/images/login.jpg
+
+42 directories, 105 files
